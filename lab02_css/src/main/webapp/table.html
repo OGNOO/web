@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pseudo Selector</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      main {
+        display: grid;
+        justify-content: center;
+        justify-items: center;
+      }
+      table {
+        align-items: center;
+        width: 450px;
+      }
+      table#tbl-member,
+      table#tbl-member th,
+      table#tbl-member td {
+        border: 1px solid #000;
+        border-collapse: collapse;
+      }
+      hr {
+        width: 100%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      table#tbl-blog {
+        width: 100%;
+        box-shadow: 3px 3px 15px gray;
+      }
+      table#tbl-blog,
+      table#tbl-blog th,
+      table#tbl-blog td {
+        line-height: 45px;
+        border-bottom: 1px solid #000;
+        border-collapse: collapse;
+      }
+      table#tbl-blog td {
+        padding-left: 8px;
+      }
+      table#tbl-blog th {
+        background-color: darkseagreen;
+        color: #1d2b93;
+      }
+      table#tbl-blog > tbody > tr:nth-child(odd) {
+        background: #bcbfd5;
+      }
+      table#tbl-blog > tbody > tr:nth-child(even) {
+        background: #e9dedb;
+      }
+      table#tbl-blog > tbody > tr:not(:first-child) {
+        font-size: 1em;
+      }
+      table#tbl-blog > tbody > tr:hover {
+        background: #b9b0b0;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="index.html">인덱스 페이지</a>
+    </nav>
+    <main>
+      <h1>테이블 스타일</h1>
+      <hr />
+      <table id="tbl-member">
+        <h3>회원정보</h3>
+
+        <th>아이디</th>
+        <th>닉네임</th>
+        <th>이메일</th>
+
+        <tr>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+        </tr>
+      </table>
+      <hr />
+      <table id="tbl-blog">
+        <h3>블로그</h3>
+        <tr>
+          <th>번호</th>
+          <th>제목</th>
+          <th>작성자</th>
+          <th>시간</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+        </tr>
+      </table>
+    </main>
+  </body>
+</html>
