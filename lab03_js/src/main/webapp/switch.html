@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>switch-case</title>
+  </head>
+  <body>
+    <nav>
+      <a href="index.html">인덱스 페이지</a>
+    </nav>
+    <main>
+      <h1>switch-case 구문</h1>
+      <select id="weekday">
+        <option value="sun">일요일</option>
+        <option value="mon">월요일</option>
+        <option value="tue">화요일</option>
+        <option value="wed">수요일</option>
+        <option value="thu">목요일</option>
+        <option value="fri">금요일</option>
+        <option value="sat">토요일</option>
+      </select>
+      <button id="btn" onclick="selectListener()">확인</button>
+      <div id="result">결과</div>
+    </main>
+    <!-- 외부 js 파일을 HTML에 포함 -->
+    <script src="js/switch.js"></script>
+    <script>
+      // $weekday = document.querySelector("#weekday");
+      // $result = document.querySelector("#result");
+      // function selectListener() {
+      //   $result.textContent = $weekday.value;
+      // }
+    </script>
+  </body>
+</html>

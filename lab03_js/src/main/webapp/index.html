@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>JavaScript</title>
+  </head>
+  <style>
+    #box1,
+    #box2 {
+      border: 2px solid gray;
+      margin: 16px;
+      padding: 16px;
+      user-select: none;
+    }
+  </style>
+  <body>
+    <header>
+      <h1>JavaScript 소개</h1>
+    </header>
+    <nav>
+      <h2>Contents</h2>
+      <ul>
+        <li>
+          <a href="condition.html">조건문</a>
+        </li>
+        <li>
+          <a href="switch.html">switch-case 조건문</a>
+        </li>
+        <li>
+          <a href="for.html">for 반복문</a>
+        </li>
+        <li>
+          <a href="while.html">while 반복문</a>
+        </li>
+        <li>
+          <a href="array.html">JavaScript 배열</a>
+        </li>
+        <li>
+          <a href="function.html">함수</a>
+        </li>
+        <li>
+          <a href="array_method.html">배열 함수 (메서드)</a>
+        </li>
+        <li>
+          <a href="object.html">객체 (Object)</a>
+        </li>
+        <li>
+          <a href="element.html">HTML 요소 찾기</a>
+        </li>
+        <li>
+          <a href="event.html">이벤트 리스너</a>
+        </li>
+      </ul>
+    </nav>
+    <main>
+      <h2>HTML 컨텐트 변경</h2>
+      <div id="box1" onclick="changeContent()">여기는 Box1 입니다.</div>
+      <h2>HTML 스타일 변경</h2>
+      <div id="box2" onmouseover="changeStyle()" onmouseout="resetStyle()">
+        여기는 Box2 입니다.
+      </div>
+    </main>
+    <script>
+      // Javascript 변수 선언 & 초기화:
+      // const 변수이름 = 값; //-> 값을 변경할 수 없는 변수(상수) 선언 & 초기화.
+      // let 변수이름 = 값; //-> 값을 변경할 수 있는 변수 선언 & 초기화.
+      const content1 = `여기는 Box1 입니다.`; // JS 에서 문자열은 큰따옴표, 작은 따옴표 모두 사용 가능.
+      const content2 = "Hello, <strong>JavaScript</strong>!";
+      let toggle = true;
+
+      function changeContent() {
+        const $box1 = document.querySelector("#box1");
+        if (toggle) {
+          $box1.innerHTML = content2;
+          toggle = false;
+        } else {
+          $box1.innerHTML = content1;
+          toggle = true;
+        }
+      }
+      const $box2 = document.querySelector("#box2");
+      function changeStyle() {
+        $box2.style.background = "blue";
+        $box2.style.color = "white";
+        $box2.style.fontSize = "200%";
+        $box2.style.fontWeight = "bold";
+        $box2.textContent = "ㅋㅋ";
+      }
+      function resetStyle() {
+        $box2.style.background = "";
+        $box2.style.color = "";
+        $box2.style.fontSize = "";
+        $box2.style.fontWeight = "";
+        $box2.textContent = "여기는 Box2 입니다.";
+      }
+    </script>
+  </body>
+</html>
