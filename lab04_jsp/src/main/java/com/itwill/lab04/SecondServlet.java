@@ -11,10 +11,10 @@ import java.io.PrintWriter;
 /**
  * Servlet implementation class SecondServlet
  */
-// ¼­ºí¸´ URL(¿äÃ» ÁÖ¼Ò) ¸ÅÇÎ ¹æ¹ı:
-// 1. web.xml(¹èÆ÷ °ü¸®ÀÚ, deployment descriptor)¿¡¼­ <servlet>, <servlet-mapping>·Î ¼³Á¤ÇÏ°Å³ª,
-// 2. ¼­ºí¸´ Å¬·¡½º¿¡¼­ @WebServlet ¾Ö³ÊÅ×ÀÌ¼ÇÀ¸·Î ¼³Á¤.
-// (ÁÖÀÇ) web.xml ¶Ç´Â ¾Ö³ÊÅ×ÀÌ¼Ç µÑ Áß ÇÏ³ª¸¸ ¼³Á¤.
+// ì„œë¸”ë¦¿ URL(ìš”ì²­ ì£¼ì†Œ) ë§¤í•‘ ë°©ë²•:
+// 1. web.xml(ë°°í¬ ê´€ë¦¬ì, deployment descriptor)ì—ì„œ <servlet>, <servlet-mapping>ë¡œ ì„¤ì •í•˜ê±°ë‚˜,
+// 2. ì„œë¸”ë¦¿ í´ë˜ìŠ¤ì—ì„œ @WebServlet ì• ë„ˆí…Œì´ì…˜ìœ¼ë¡œ ì„¤ì •.
+// (ì£¼ì˜) web.xml ë˜ëŠ” ì• ë„ˆí…Œì´ì…˜ ë‘˜ ì¤‘ í•˜ë‚˜ë§Œ ì„¤ì •.
 @WebServlet(name = "secondServlet", urlPatterns = { "/ex2" })
 public class SecondServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -25,16 +25,16 @@ public class SecondServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 	        throws ServletException, IOException {
-		System.out.println("SecondServlet::doGet() ¸Ş¼­µå È£Ãâ");
+		System.out.println("SecondServlet::doGet() ë©”ì„œë“œ í˜¸ì¶œ");
 		
-		// WAS°¡ Å¬¶óÀÌ¾ğÆ®·Î º¸³»´Â ÄÁÅÙÆ® Å¸ÀÔ ¼³Á¤:
+		// WASê°€ í´ë¼ì´ì–¸íŠ¸ë¡œ ë³´ë‚´ëŠ” ì»¨í…íŠ¸ íƒ€ì… ì„¤ì •:
 		response.setContentType("text/html; charset=UTF-8");
 		
 		PrintWriter out = response.getWriter();
 		out.append("<html>")
 		    .append("<body>")
-		    .append("<h1>µÎ¹øÂ° Servlet</h1>")
-		    .append("<a href='/lab04'>ÀÎµ¦½º ÆäÀÌÁö</a>")
+		    .append("<h1>ë‘ë²ˆì§¸ Servlet</h1>")
+		    .append("<a href='/lab04'>ì¸ë±ìŠ¤ í˜ì´ì§€</a>")
 		    .append("</body>")
 		    .append("</html>");
 		

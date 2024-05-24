@@ -15,24 +15,21 @@ public class RedirectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		System.out.println("RedirectServlet::doGet() È£Ãâ");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+	        throws ServletException, IOException {
+		System.out.println("RedirectServlet::doGet() í˜¸ì¶œ");
 		
-		response.sendRedirect("ex3"); // °°Àº WAS ÀÇ ÆäÀÌÁö·Î ÀÌµ¿
-//		response.sendRedirect("https://www.naver.com"); // ´Ù¸¥ À¥ ¼­¹ö·Î ÆäÀÌÁö ÀÌµ¿.
-		// "redirect" ¹æ½ÄÀÇ ÆäÀÌÁö ÀÌµ¿:
-		// ÃÖÃÊ ¿äÃ»(request) --> redirect ÀÀ´ä (response) --> Àç¿äÃ» --> ÀÀ´ä
-		// ÃÖÃÊ ¿äÃ» ÁÖ¼Ò°¡ ÀÌµ¿ÇÏ´Â ÆäÀÌÁö·Î ¹Ù²ñ.
-		// ÃÖÃÊ ¿äÃ»ÀÇ request, response °´Ã¼°¡ ÀÌµ¿ÇÏ´Â ÆäÀÌÁö·Î Àü´ÞµÇÁö ¾ÊÀ½!
-		// °°Àº WAS »Ó¸¸ ¾Æ´Ï¶ó, ´Ù¸¥ À¥ ¼­¹ö, ´Ù¸¥ À¥ ¾ÖÇÃ¸®ÄÉÀÌ¼ÇÀ¸·Îµµ ÀÌµ¿ÀÌ °¡´É.
+		response.sendRedirect("ex3"); // ê°™ì€ WASì˜ íŽ˜ì´ì§€ë¡œ ì´ë™
+//		response.sendRedirect("https://www.naver.com"); // ë‹¤ë¥¸ ì›¹ ì„œë²„ë¡œ íŽ˜ì´ì§€ ì´ë™.
 		
+		// "redirect" ë°©ì‹ì˜ íŽ˜ì´ì§€ ì´ë™:
+		// ìµœì´ˆ ìš”ì²­(request) --> redirect ì‘ë‹µ(response) --> ìž¬ìš”ì²­ --> ì‘ë‹µ
+		// ìµœì´ˆ ìš”ì²­ ì£¼ì†Œê°€ ì´ë™í•˜ëŠ” íŽ˜ì´ì§€ë¡œ ë°”ë€œ.
+		// ìµœì´ˆ ìš”ì²­ì˜ request, response ê°ì²´ê°€ ì´ë™í•˜ëŠ” íŽ˜ì´ì§€ë¡œ ì „ë‹¬ë˜ì§€ ì•ŠìŒ!
+		// ê°™ì€ WAS ë¿ë§Œ ì•„ë‹ˆë¼, ë‹¤ë¥¸ ì›¹ ì„œë²„, ë‹¤ë¥¸ ì›¹ ì• í”Œë¦¬ì¼€ì´ì…˜ìœ¼ë¡œë„ ì´ë™ì´ ê°€ëŠ¥.
 	}
 
 }

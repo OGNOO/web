@@ -15,33 +15,27 @@ public class ForwardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("ForwardServlet::doGet() È£Ãâ");
-		
-		// ¿äÃ»ÀÌ ¿À¸é WAS´Â web.xml ¶Ç´Â @WebServlet ¿¡³ÊÅ×ÀÌ¼Ç¿¡¼­ ¼³Á¤µÈ URL mapping ¿¡ µû¶ó¼­
-		// ¿äÃ»À» Ã³¸®ÇÒ ¼ö ÀÖ´Â ¼­ºí¸´ Å¬·¡½º °´Ã¼ÀÇ ¸Ş¼­µå(doGet, doPost)¸¦ È£Ãâ
-		// ¼­ºí¸´¿¡¼­´Â HTML ÄÚµå¸¦ ÀÛ¼ºÇØ¼­ ÀÀ´äÀ» º¸³»¸é µÊ.
-		// ¼­ºí¸´¿¡¼­ HTML À» ÀÛ¼ºÇÏ´Â °ÍÀº ³Ê¹« ¹ø°Å·Î¿ò.
-		// ¼­ºí¸´ÀÌ JSP·Î ¿äÃ»À» Àü´ŞÇÏ°í, JSP°¡ HTML ÄÚµå¸¦ ÀÛ¼ºÇÏ´Â °ÍÀÌ ´õ ½¬¿ò.
-		request.getRequestDispatcher("example.jsp").forward(request, response);
-		
-		// "forward" ¹æ½ÄÀÇ À¥ ÆäÀÌÁö ÀÌµ¿:
-		// - °°Àº WASÀÇ °°Àº À¥ ¾ÖÇÃ¸®ÄÉÀÌ¼Ç ¾È¿¡¼­¸¸ ÆäÀÌÁö¸¦ ÀÌµ¿ÇÏ´Â ¹æ½Ä.
-		// - ÃÖÃÊ ¿äÃ» ÁÖ¼Ò°¡ ¹Ù²îÁö ¾ÊÀ½.
-		// - request, response °´Ã¼°¡ À¯ÁöµÊ.
-		// - ´Ù¸¥ WAS ¶Ç´Â ´Ù¸¥ À¥ ¾ÖÇÃ¸®ÄÉÀÌ¼ÇÀÇ ÆäÀÌÁö·Î´Â Æ÷¿öµå(forward)ÇÒ ¼ö ¾øÀ½!
-		// 
-	}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		System.out.println("ForwardServlet::doGet() í˜¸ì¶œ");
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		// ìš”ì²­ì´ ì˜¤ë©´ WASëŠ” web.xml ë˜ëŠ” @WebSevlet ì• ë„ˆí…Œì´ì…˜ì—ì„œ ì„¤ì •ëœ URL mappingì— ë”°ë¼ì„œ
+		// ìš”ì²­ì„ ì²˜ë¦¬í•  ìˆ˜ ìˆëŠ” ì„œë¸”ë¦¿ í´ë˜ìŠ¤ ê°ì²´ì˜ ë©”ì„œë“œ(doGet, doPost)ë¥¼ í˜¸ì¶œ.
+		// ì„œë¸”ë¦¿ì—ì„œëŠ” HTML ì½”ë“œë¥¼ ì‘ì„±í•´ì„œ ì‘ë‹µì„ ë³´ë‚´ë©´ ë¨.
+		// ì„œë¸”ë¦¿ì—ì„œ HTMLì„ ì‘ì„±í•˜ëŠ” ê²ƒì€ ë„ˆë¬´ ë²ˆê±°ë¡œì›€.
+		// ì„œë¸”ë¦¿ì´ JSPë¡œ ìš”ì²­ì„ ì „ë‹¬í•˜ê³ , JSPê°€ HTML ì½”ë“œë¥¼ ì‘ì„±í•˜ëŠ” ê²ƒì´ ë” ì‰¬ì›€.
+
+		request.getRequestDispatcher("example.jsp").forward(request, response);
+
+		// "forward" ë°©ì‹ì˜ ì›¹ í˜ì´ì§€ ì´ë™:
+		// - ê°™ì€ WASì˜ ê°™ì€ ì›¹ ì• í”Œë¦¬ì¼€ì´ì…˜ ì•ˆì—ì„œë§Œ í˜ì´ì§€ë¥¼ ì´ë™í•˜ëŠ” ë°©ì‹.
+		// - ìµœì´ˆ ìš”ì²­ ì£¼ì†Œê°€ ë°”ë€Œì§€ ì•ŠìŒ.
+		// - request, response ê°ì²´ê°€ ìœ ì§€ë¨.
+		// - ë‹¤ë¥¸ WAS ë˜ëŠ” ë‹¤ë¥¸ ì›¹ ì• í”Œë¦¬ì¼€ì´ì…˜ì˜ í˜ì´ì§€ë¡œëŠ” í¬ì›Œë“œ(forward)í•  ìˆ˜ ì—†ìŒ!
 	}
 
 }

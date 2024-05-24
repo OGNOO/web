@@ -11,53 +11,55 @@ import java.io.IOException;
  */
 public class FirstServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public FirstServlet() {
-        System.out.println("FirstServlet »ı¼º...");
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-    // WAS(Web Application Server): À¥ ¿äÃ»(request)/ÀÀ´ä(response)À» Ã³¸®ÇÏ´Â ÇÁ·Î±×·¥. Tomcat.
-    // doGet(): get ¹æ½ÄÀÇ ¿äÃ»ÀÌ ¿ÔÀ» ¶§ WAS°¡ È£ÃâÇÏ´Â ¸Ş¼­µå.
-    // doPost(): post ¹æ½ÄÀÇ ¿äÃ»ÀÌ ¿ÔÀ» ¶§ WAS°¡ È£ÃâÇÏ´Â ¸Ş¼­µå.
-    // ÆÄ¶ó¹ÌÅÍ request: Å¬¶óÀÌ¾ğÆ®°¡ ¼­¹ö·Î º¸³½ ¿äÃ»ÀÇ Á¤º¸, ±â´ÉµéÀ» °®´Â °´Ã¼.
-    // ÆÄ¶ó¹ÌÅÍ response: ¼­¹ö°¡ Å¬¶óÀÌ¾ğÆ®·Î º¸³¾ ÀÀ´äÀÇ Á¤º¸, ±â´ÉµéÀ» °®´Â °´Ã¼.
-    @Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
-	        throws ServletException, IOException {
-        System.out.println("FirstServlet::doGet() È£Ãâ");
-		
-        // WAS°¡ Å¬¶óÀÌ¾ğÆ®·Î º¸³»´Â ÀÀ´ä(response)ÀÇ ÄÁÅÙÆ® Å¸ÀÔ(ÆÄÀÏ Çü½Ä/ÀÎÄÚµù)À» ¼³Á¤:
-        // ºê¶ó¿ìÀú¿¡¼­ ÇÑ±ÛÀÌ ±úÁöÁö ¾Êµµ·Ï ÇÏ±â À§ÇØ¼­.
-        response.setContentType("text/html; charset=UTF-8");
-        
-        response.getWriter()
-		    .append("<!doctype html>")
-		    .append("<html>")
-		    .append("<head>")
-		    .append("<meta charset='UTF-8' />")
-		    .append("<title>Servlet</title>")
-		    .append("</head>")
-		    .append("<body>")
-		    .append("<h1>Ã¹¹øÂ° Servlet</h1>")
-		    .append("<a href='/lab04'>ÀÎµ¦½º ÆäÀÌÁö</a>")
-		    .append("</body>")
-		    .append("</html>");
+	public FirstServlet() {
+		System.out.println("FirstServlet ìƒì„±...");
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-    @Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
-	        throws ServletException, IOException {
-		System.out.println("FirstServlet::doPost() È£Ãâ");
-        doGet(request, response);
+	// WAS(Web Application Server): ì›¹ ìš”ì²­(request)/ì‘ë‹µ(response)ì„ ì²˜ë¦¬í•˜ëŠ” í”„ë¡œê·¸ë¨. Tomcat.
+	// doGet(): get ë°©ì‹ì˜ ìš”ì²­ì´ ì™”ì„ ë•Œ WASê°€ í˜¸ì¶œí•˜ëŠ” ë©”ì„œë“œ.
+	// doPost(): post ë°©ì‹ì˜ ìš”ì²­ì´ ì™”ì„ ë•Œ WASê°€ í˜¸ì¶œí•˜ëŠ” ë©”ì„œë“œ.
+	// íŒŒë¼ë¯¸í„° request: í´ë¼ì´ì–¸íŠ¸ê°€ ì„œë²„ë¡œ ë³´ë‚¸ ìš”ì²­ì˜ ì •ë³´, ê¸°ëŠ¥ë“¤ì„ ê°–ëŠ” ê°ì²´.
+	// íŒŒë¼ë¯¸í„° response: ì„œë²„ê°€ í´ë¼ì´ì–¸íŠ¸ë¡œ ë³´ë‚¼ ì‘ë‹µì˜ ì •ë³´, ê¸°ëŠ¥ë“¤ì„ ê°–ëŠ” ê°ì²´.
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		System.out.println("FirstServlet::doGet() í˜¸ì¶œ");
+
+		// WASê°€ í´ë¼ì´ì–¸íŠ¸ë¡œ ë³´ë‚´ëŠ” ì‘ë‹µ(response)ì˜ ì»¨í…íŠ¸ íƒ€ì…(íŒŒì¼ í˜•ì‹/ì¸ì½”ë”©)ì„ ì„¤ì •:
+		// ë¸Œë¼ìš°ì €ì—ì„œ í•œê¸€ì´ ê¹¨ì§€ì§€ ì•Šë„ë¡ í•˜ê¸° ìœ„í•´ì„œ.
+		response.setContentType("text/html; charset=UTF-8");
+
+		response.getWriter()
+				.append("<!doctype html>")
+				.append("<html>")
+				.append("<head>")
+				.append("<meta charset='UTF-8' />")
+				.append("<title>Servlet</title>")
+				.append("</head>")
+				.append("<body>")
+				.append("<h1>ì²«ë²ˆì§¸ Servlet</h1>")
+				.append("<a href='/lab04'>ì¸ë±ìŠ¤ í˜ì´ì§€</a>")
+				.append("</body>")
+				.append("</html>");
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		System.out.println("FirstServlet::doPost() í˜¸ì¶œ");
+		doGet(request, response);
 	}
 
 }
