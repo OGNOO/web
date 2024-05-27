@@ -27,7 +27,7 @@ public class FrontController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("FrontController#doGet");
-		log.debug("doGet");
+		log.trace("doGet");
 
 		request.getRequestDispatcher("/WEB-INF/views/home.jsp").forward(request, response);
 	}
