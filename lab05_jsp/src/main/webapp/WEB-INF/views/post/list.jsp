@@ -20,26 +20,32 @@
 
 		<main>
 			<div class="card mt-2">
-				<div class="card-header text-center text-white bg-dark bg-gradient">
-					<h2>POSTS</h2>
+				<div class="card-header text-center text-white bg-dark bg-gradient"
+					style="margin-bottom: 0.5px;">
+					<h2 style="margin-top: 0.25em; letter-spacing: 0.3em;">POSTS</h2>
 				</div>
-				<div class="card-body">
+				<div class="card-body" style="padding: 0; overflow-x: auto;">
 					<table class="table table-hover table-dark table-striped">
-						<thead>
+						<thead style="text-align: center;">
 							<tr>
-								<td>NO</td>
-								<td>Title</td>
-								<td>Author</td>
+								<td style="width: 10%;">NO</td>
+								<td style="width: 33%;">Title</td>
+								<td style="width: 33%;">Author</td>
 								<td>M.T</td>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach items="${ posts }" var="p">
 								<tr>
-									<td>${ p.id }</td>
-									<td>${ p.title }</td>
-									<td>${ p.author }</td>
-									<td>${ p.modifiedTime }</td>
+									<td style="white-space: nowrap; overflow: hidden;">${ p.id }</td>
+									<td style="white-space: nowrap; overflow: hidden;"><c:url
+											var="postDetailsPage" value="/post/details">
+											<c:param name="id" value="${ p.id }"></c:param>
+										</c:url> <a style="text-decoration: none; color: #fff"
+										href="${postDetailsPage}">${ p.title }</a></td>
+									<td style="white-space: nowrap; overflow: hidden;">${ p.author }</td>
+									<td
+										style="text-align: end; white-space: nowrap; overflow: hidden;">${ p.modifiedTime }</td>
 								</tr>
 							</c:forEach>
 						</tbody>

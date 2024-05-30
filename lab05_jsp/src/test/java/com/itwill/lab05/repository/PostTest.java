@@ -70,7 +70,8 @@ public class PostTest {
 
 	@Test
 	public void testUpdateById() {
-		int res = dao.updateById("qqq", "www", "eee", 202);
+		Post post = Post.builder().title("1").content("1").author("1").id(1).build();
+		int res = dao.updateById(post);
 //		Assertions.assertEquals(1, res);
 		if (res != 0) {
 			log.debug("res = {}", res);

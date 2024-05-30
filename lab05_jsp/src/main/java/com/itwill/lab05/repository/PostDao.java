@@ -23,7 +23,6 @@ public enum PostDao {
 
 	private static final Logger log = LoggerFactory.getLogger(PostDao.class);
 	private final HikariDataSource ds = DataSourceUtil.getInstance().getDataSource();
-	
 
 	// select() 메서드에서 실행할 SQL:
 	private static final String SQL_SELECT_ALL = "select * from posts order by id desc";
@@ -64,24 +63,24 @@ public enum PostDao {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		Post post = null;
-		
+
 		try {
 			conn = ds.getConnection();
 			stmt = conn.prepareStatement(SQL_SELECT_BY_ID);
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
-			
+
 			if (rs.next()) {
-				 post = fromResultSetToPost(rs);
+				post = fromResultSetToPost(rs);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			closeResources(conn, stmt, rs);
 		}
-		
+
 		return post;
-		
+
 	}
 
 	// posts 테이블에 insert 하는 SQL:
@@ -138,10 +137,10 @@ public enum PostDao {
 		return result;
 	}
 
-	private static final String SQL_UPDATE_BY_ID = "UPDATE posts SET title = ?, content = ?, author = ?, modified_time = systimestamp WHERE id = ?";
+	private static final String SQL_UPDATE_BY_ID = "UPDATE posts SET title = ?, content = ?, modified_time = systimestamp WHERE id = ?";
 
-	public int updateById(String title, String content, String author, int id) {
-		log.debug("update({})", id);
+	public int updateById(Post post) {
+		log.debug("updateById({})", post);
 		log.debug(SQL_UPDATE_BY_ID);
 
 		Connection conn = null;
@@ -153,10 +152,9 @@ public enum PostDao {
 			stmt = conn.prepareStatement(SQL_UPDATE_BY_ID);
 
 			int i = 1;
-			stmt.setString(i++, title);
-			stmt.setString(i++, content);
-			stmt.setString(i++, author);
-			stmt.setInt(i++, id);
+			stmt.setString(i++, post.getTitle());
+			stmt.setString(i++, post.getContent());
+			stmt.setInt(i++, post.getId());
 			result = stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

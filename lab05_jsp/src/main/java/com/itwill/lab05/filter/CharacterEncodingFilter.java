@@ -25,6 +25,7 @@ public class CharacterEncodingFilter extends HttpFilter {
 		// <filter>의 <param-value> 값을 리턴해줌.
 		encoding = filterConfig.getInitParameter("encoding");
 		log.debug("init: encoding = {}", encoding);
+
 	}
 
 	// 필터 체인(-> 서블릿)으로 진행하기 위해서 WAS가 호출하는 메서드.
@@ -33,6 +34,16 @@ public class CharacterEncodingFilter extends HttpFilter {
 			throws IOException, ServletException {
 		// 요청(request) 객체의 문자열 인코딩 타입을 (UTF-8)로 설
 		request.setCharacterEncoding(encoding);
+
+		// 접속한 ip 확인
+		String remoteAddr = request.getRemoteAddr();
+		String localhost = "192.168.20.27";
+		String myIp = "0:0:0:0:0:0:0:1";
+		if (myIp.equals(remoteAddr) || localhost.equals(remoteAddr)) {
+		} else {
+			log.info("접속 IP: {}", remoteAddr);
+//			request.getRequestDispatcher("/").forward(request, response);
+		}
 
 		// 다음 필터 체인을 진행(-> 서블릿 메서드(doGet, doPost) 호출)
 		chain.doFilter(request, response);
