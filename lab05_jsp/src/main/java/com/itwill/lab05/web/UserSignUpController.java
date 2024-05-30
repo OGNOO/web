@@ -36,8 +36,14 @@ public class UserSignUpController extends HttpServlet {
 		log.debug(userId);
 
 		User user = User.builder().userId(userId).password(password).email(email).build();
-
-		int res = userService.create(user);
+		int findUser = userService.select(user.getUserId());
+		int res = 1;
+		if (findUser == 1) {
+			log.debug("이미 있는 계정");
+		} else {
+			log.debug("계정 생성");
+			res = userService.create(user);
+		}
 
 		String url;
 

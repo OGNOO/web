@@ -21,6 +21,7 @@ public enum UserDao {
 	private static final String SQL_INSERT = "insert into users (userid, password, email) values (?, ?, ?)";
 
 	public int createUser(User user) {
+		log.debug("createUser(): {}", user);
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		int result = 0;
@@ -31,15 +32,40 @@ public enum UserDao {
 			stmt.setString(i++, user.getUserId());
 			stmt.setString(i++, user.getPassword());
 			stmt.setString(i++, user.getEmail());
-			
+
 			result = stmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			closeResources(conn, stmt);
 		}
-		
+
+		return result;
+	}
+
+	private static final String SQL_SELECT_BY_USERID = "SELECT COUNT(*) FROM users WHERE userid = ?";
+
+	public int selectUser(String userId) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		try {
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement(SQL_SELECT_BY_USERID);
+			stmt.setString(1, userId);
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				result = rs.getInt("count(*)");
+			}
+			log.debug("result = {}", result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeResources(conn, stmt, rs);
+		}
 		return result;
 	}
 
@@ -60,4 +86,5 @@ public enum UserDao {
 	private void closeResources(Connection conn, Statement stmt) {
 		closeResources(conn, stmt, null);
 	}
+
 }

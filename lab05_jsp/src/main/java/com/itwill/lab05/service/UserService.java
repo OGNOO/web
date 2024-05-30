@@ -21,4 +21,9 @@ public enum UserService {
 
 		return result; // insert된 행의 개수를 리턴.
 	}
+
+	public int select(String userId) {
+		int result = userDao.selectUser(userId);
+		return result;
+	}
 }
