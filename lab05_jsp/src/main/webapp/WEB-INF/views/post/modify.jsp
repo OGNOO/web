@@ -30,7 +30,7 @@
 							<label for="id" class="form-label badge bg-dark"
 								style="font-size: medium; line-height: 130%">번호</label> <input
 								id="id" class="mb-3 form-control" type="text" name="id"
-								value="${post.id }" readonly />
+								 readonly />
 						</div>
 						<div class="m-2">
 							<label for="title" class="form-label badge bg-dark"
@@ -44,12 +44,13 @@
 							<textarea id="content" class="mb-3 form-control" rows="5"
 								name="content" placeholder="내용">${ post.content }</textarea>
 						</div>
-						<div class="m-2">
-							<label for="author" class="form-label badge bg-dark"
-								style="font-size: medium; line-height: 130%">작성자</label> <input
-								id="author" class="mb-3 form-control" type="text"
-								value="${ post.author }" readonly />
-						</div>
+						<c:if test="${ post.author == signedInUser }">
+							<div class="m-2">
+								<label for="author" class="form-label badge bg-dark"
+									style="font-size: medium; line-height: 130%">작성자</label> <input
+								value="${ post.author }"	id="author" class="mb-3 form-control" type="text" readonly />
+							</div>
+						</c:if>
 					</form>
 				</div>
 				<div class="card-footer text-center ">
@@ -65,5 +66,8 @@
 		crossorigin="anonymous"></script>
 	<c:url var="post_modify_js" value="/js/post_modify.js" />
 	<script src="${ post_modify_js }"></script>
+	<script>
+		$id.value= `${ post.id }`;
+	</script>
 </body>
 </html>

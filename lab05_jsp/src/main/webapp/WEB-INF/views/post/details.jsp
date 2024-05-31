@@ -18,6 +18,7 @@
 		<c:set var="pageTitle" value="Post Details" />
 		<%-- scope 의 기본값은 page --%>
 		<%@ include file="../fragments/header.jspf"%>
+
 		<main>
 			<div class="card mt-2">
 				<div class="card-header text-center text-white bg-dark bg-gradient"
@@ -65,12 +66,14 @@
 						</div>
 					</form>
 				</div>
-				<div class="card-footer text-center">
-					<c:url var="postModifyPage" value="/post/modify">
-						<c:param name="id" value="${post.id}" />
-					</c:url>
-					<a class="btn btn-outline-primary" href="${postModifyPage}">수정하기</a>
-				</div>
+				<c:if test="${ post.author == signedInUser }">
+					<div class="card-footer text-center">
+						<c:url var="postModifyPage" value="/post/modify">
+							<c:param name="id" value="${post.id}" />
+						</c:url>
+						<a class="btn btn-outline-primary" href="${postModifyPage}">수정하기</a>
+					</div>
+				</c:if>
 			</div>
 		</main>
 	</div>

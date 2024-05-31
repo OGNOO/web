@@ -112,7 +112,7 @@ public enum PostDao {
 		return result;
 	}
 
-	// TODO: posts 테이블에서 id(PK)로 행 1개를 삭제하는 SQL:
+	// posts 테이블에서 id(PK)로 행 1개를 삭제하는 SQL:
 	private static final String SQL_DELETE = "delete from posts where id = ?";
 
 	public int delete(int id) {

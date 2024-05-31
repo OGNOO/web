@@ -34,11 +34,9 @@
 							<textarea class="form-control" rows="5" name="content"
 								placeholder="내용" required></textarea>
 						</div>
-						<div class="m-2">
-							<input class="form-control" type="text" name="author"
-								placeholder="작성자" required />
+						<div class="m-2 d-none">
+							<input class="form-control" type="text" name="author" readonly />
 						</div>
-
 						<div class="mt-3 m-2 d-flex gap-2  d-md-block">
 							<input class="mb-1 form-control btn btn-success " type="submit"
 								value="저장" /> <input id="cancle"
@@ -58,11 +56,13 @@
 		const $content = document.querySelector('textarea[name="content"]');
 		const $author = document.querySelector('input[name="author"]');
 		const $cancle = document.querySelector('#cancle');
-	    		
+	    
+		const $a_v = $author.value = `${ signedInUser }`;
+		
+		
 		$cancle.addEventListener('click', () => {
 			  $title.value='';
 			  $content.value='';
-			  $author.value='';
 			});
 	</script>
 </body>
