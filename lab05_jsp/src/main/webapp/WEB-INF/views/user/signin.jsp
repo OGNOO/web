@@ -47,7 +47,37 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 		crossorigin="anonymous"></script>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		function getCookieValue(cookieName) {
+			const name = cookieName + "=";
+			const decodedCookie = decodeURIComponent(document.cookie);
+			const cookieArray = decodedCookie.split(';');
+
+			for (let i = 0; i < cookieArray.length; i++) {
+				let cookie = cookieArray[i];
+
+				while (cookie.charAt(0) == ' ') {
+					cookie = cookie.substring(1);
+				}
+
+				if (cookie.indexOf(name) == 0) {
+					return cookie.substring(name.length, cookie.length);
+				}
+			}
+			return "";
+		}
+
+		const resultCookieValue = getCookieValue('result');
+		console.log(resultCookieValue);
+
+		function deleteCookie(name) {
+			document.cookie = name + '=; Max-Age=-99999999;';
+		}
+
+		if (resultCookieValue === 'f') {
+			deleteCookie('result');
+			alert("비밀번호가 일치하지 않습니다.");
+		}
+	</script>
 </body>
 </html>

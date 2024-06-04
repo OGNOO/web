@@ -105,6 +105,74 @@ public enum UserDao {
 		return result;
 	}
 
+	private static final String SQL_SELECT_BY_ID = "SELECT * FROM users WHERE userid = ?";
+
+	public User selectById(String userId) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		User result = null;
+		try {
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement(SQL_SELECT_BY_ID);
+			stmt.setString(1, userId);
+			rs = stmt.executeQuery();
+			if (rs.next()) {
+				result = fromResultSetToUser(rs);
+			}
+			log.debug("result = {}", result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeResources(conn, stmt, rs);
+		}
+		return result;
+	}
+
+	private static final String SQL_POINTS_UP = "Update users set points = points + 10 where userid = ?";
+
+	public int pointsUp(String userId) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+
+		int result = 0;
+		try {
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement(SQL_POINTS_UP);
+			stmt.setString(1, userId);
+			result = stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeResources(conn, stmt);
+		}
+
+		return result;
+	}
+
+	private static final String SQL_UPDATE_EMAIL = "Update users set email = ? where userid = ?";
+
+	public int updateById(String userId, String email) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+
+		int result = 0;
+		try {
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement(SQL_UPDATE_EMAIL);
+			stmt.setString(1, email);
+			stmt.setString(2, userId);
+			result = stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeResources(conn, stmt);
+		}
+
+		return result;
+	}
+
 	private User fromResultSetToUser(ResultSet rs) throws SQLException {
 		int id = rs.getInt("id");
 		String userid = rs.getString("userid");
@@ -134,4 +202,5 @@ public enum UserDao {
 	private void closeResources(Connection conn, Statement stmt) {
 		closeResources(conn, stmt, null);
 	}
+
 }

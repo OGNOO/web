@@ -57,7 +57,7 @@
 		const $author = document.querySelector('input[name="author"]');
 		const $cancle = document.querySelector('#cancle');
 	    
-		const $a_v = $author.value = `${ signedInUser }`;
+		$author.value = `${ signedInUser }`;
 		
 		
 		$cancle.addEventListener('click', () => {

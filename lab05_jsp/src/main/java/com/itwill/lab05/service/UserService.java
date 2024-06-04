@@ -37,4 +37,16 @@ public enum UserService {
 
 		return user;
 	}
+
+	public User read(String userId) {
+		User user = userDao.selectById(userId);
+		
+		return user;
+	}
+
+	public int update(String userId, String email) {
+		int res =  userDao.updateById(userId, email);
+		
+		return res;
+	}
 }

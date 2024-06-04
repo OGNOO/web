@@ -27,11 +27,15 @@
 					<%-- not empty = not null and length > 0 --%>
 					<%-- empty = null or length = 0 --%>
 					<%-- 로그인 정보가 세션에 저장된 경우 --%>
+					<li class="nav-item"><c:url var="myInfo" value="/user/myInfo" />
+						<a class="nav-link" href="${ myInfo }"><span>${ signedInUser }</span>
+							님의 정보 조회</a></li>
 					<li class="nav-item"><c:url var="signOutPage"
-							value="/user/signout" /> <a class="nav-link" href="${ signOutPage }"><span>${ signedInUser }</span> 로그아웃</a></li>
+							value="/user/signout" /> <a class="nav-link"
+						href="${ signOutPage }"><span>${ signedInUser }</span> 로그아웃</a></li>
 				</c:if>
 				<c:if test="${ empty signedInUser }">
-				    <%-- 세션에 로그인 정보가 없는 경우 --%>
+					<%-- 세션에 로그인 정보가 없는 경우 --%>
 					<li class="nav-item"><c:url var="signinPage"
 							value="/user/signin" /> <a class="nav-link"
 						href="${ signinPage }">로그인</a></li>

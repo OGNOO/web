@@ -29,8 +29,7 @@
 						<div class="m-2">
 							<label for="id" class="form-label badge bg-dark"
 								style="font-size: medium; line-height: 130%">번호</label> <input
-								id="id" class="mb-3 form-control" type="text" name="id"
-								 readonly />
+								id="id" class="mb-3 form-control" type="text" name="id" readonly />
 						</div>
 						<div class="m-2">
 							<label for="title" class="form-label badge bg-dark"
@@ -48,7 +47,8 @@
 							<div class="m-2">
 								<label for="author" class="form-label badge bg-dark"
 									style="font-size: medium; line-height: 130%">작성자</label> <input
-								value="${ post.author }"	id="author" class="mb-3 form-control" type="text" readonly />
+									value="${ post.author }" id="author" class="mb-3 form-control"
+									type="text" readonly />
 							</div>
 						</c:if>
 					</form>
@@ -67,7 +67,8 @@
 	<c:url var="post_modify_js" value="/js/post_modify.js" />
 	<script src="${ post_modify_js }"></script>
 	<script>
-		$id.value= `${ post.id }`;
+		const $id = document.querySelector("#id");
+		$id.value = `${ post.id }`;
 	</script>
 </body>
 </html>
