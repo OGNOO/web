@@ -135,15 +135,15 @@
         </dependency>
 
         <!-- Spice up your java: Automatic Resource Management, automatic
-        generation of getters, setters, equals, hashCode and toString, and more! -->
+        generation of 
+        getters, setters, equals, hashCode and toString, and more! -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok-version}</version>
             <scope>compile</scope>
         </dependency>
-        
-        
+
     </dependencies>
 
     <!-- 빌드 툴(플러그인) 설정 -->
