@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwill.spring2.repository.CommentDao">
+	<select id="selectByPostId" parameterType="Integer"
+		resultType="Comment">
+		select * from comments
+		where post_id=#{id}
+		order by
+		modified_time desc
+	</select>
+
+	<insert id="insertComment" parameterType="Comment">
+		INSERT into comments
+		(post_id, username, ctext)
+		VALUES
+		(#{postId}, #{userName}, #{ctext})
+	</insert>
+
+	<update id="updateComment" parameterType="Comment">
+		update comments set
+		ctext = #{ctext}, modified_time=
+		systimestamp
+		where id = #{id}
+	</update>
+
+	<delete id="deleteByIdComment" parameterType="Integer">
+		delete from
+		comments
+		where
+		id = #{id}
+	</delete>
+
+	<delete id="deleteByPostIdComment" parameterType="Integer">
+		delete from
+		comments
+		where
+		post_id = #{postid}
+	</delete>
+
+	<select id="selectCommentCount" resultType="Integer">
+		select count(*) from
+		comments
+		where post_id = #{id}
+	</select>
+
+	<select id="selectById" resultType="Comment"
+		parameterType="Integer">
+		select * from comments
+		where id = #{id}
+	</select>
+</mapper>

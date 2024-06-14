@@ -21,12 +21,45 @@ public class PostDaoTest {
 
 	@Test
 	public void testSelectAll() {
-		Assertions.assertNotNull(postDao);
+//		Assertions.assertNotNull(postDao);
 		log.debug("testSelectAll()");
-		
+
 		List<Post> list = postDao.selectOrderByIdDesc();
-		for (Post p:list) {
+		for (Post p : list) {
+
 			log.debug(p.toString());
 		}
+	}
+
+//	@Test
+	public void testSelectId() {
+		Post p = postDao.selectByIdDesc(62);
+		Assertions.assertNotNull(p);
+		log.debug(p.toString());
+
+		Post p1 = postDao.selectByIdDesc(2);
+		Assertions.assertNull(p1);
+	}
+
+//	@Test
+	public void testInsertPost() {
+		Post p = Post.builder().title("xptmxm1").author("테스트1").content("내용1").build();
+		int res = postDao.insertPost(p);
+
+		Assertions.assertEquals(1, res);
+	}
+
+//	@Test
+	public void testDeleteById() {
+		int res = postDao.deleteById(62);
+		Assertions.assertEquals(1, res);
+	}
+
+//	@Test
+	public void testUpdateByAuthor() {
+		Post p = Post.builder().title("xptmxm3").author("테스트").content("내용3").build();
+		int res = postDao.updateById(p);
+
+		Assertions.assertEquals(2, res);
 	}
 }

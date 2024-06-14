@@ -23,6 +23,9 @@ public class Post {
 	private String title;
 	private String content;
 	private String author;
+	
+	// 날짜 형식 변환해서 받을거면 String 타입으로 바꿔야 함.
+	// 내가 변환한 날짜 형식은 LocalDateTime 으로 자동으로 변환
 	private LocalDateTime createdTime; // 컬럼 이름에는 밑줄이 사용. 필드 이름은 camel case.
 	private LocalDateTime modifiedTime;
 }
