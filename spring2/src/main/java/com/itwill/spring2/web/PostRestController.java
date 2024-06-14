@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,13 +16,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@RequiredArgsConstructor
 @RestController
+@RequiredArgsConstructor
+@RequestMapping("/post")
 public class PostRestController {
-
 	private final PostService postService;
 
-	@GetMapping("/post/search")
+	@GetMapping("/search")
 	@ResponseBody
 	public List<PostListAjaxDto> search(@ModelAttribute PostSearchDto postSearchDto) {
 		log.debug(postSearchDto.toString());

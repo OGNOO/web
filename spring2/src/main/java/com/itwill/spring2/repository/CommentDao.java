@@ -17,10 +17,10 @@ public interface CommentDao {
 	int deleteByIdComment(Integer id);
 	
 	// 포스트에 달려 있는 모든 댓글 삭제
-	int deleteByPostIdComment(Integer postid);
+	int deleteByPostIdComment(Integer postId);
 	
 	// 포스트에 달려 있는 댓글 개수를 검색
-	int selectCommentCount(Integer postid);
+	int selectCommentCount(Integer postId);
 	
 	// 댓글 아이디(PK)로 검색.
 	Comment selectById(Integer id);

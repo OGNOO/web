@@ -47,7 +47,7 @@ public class PostService {
 			return list.stream().map(PostListDto::fromEntity).toList();
 			// map((x) -> PostListDto.fromEntity(x))
 		} else {
-			return null;
+			return Collections.emptyList();
 		}
 	}
 
