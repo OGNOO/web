@@ -179,16 +179,38 @@ uri="jakarta.tags.core"%>
         e.innerText = trimmedDateString;
       });
 
+      function sortList(e, itemVal) {
+        console.log(e.target.innerText);
+        console.log(itemVal);
+
+        $.ajax({
+          url: "../post/sort",
+          type: "get",
+          data: {
+            sortCategory: e.target.innerText,
+            sort: itemVal,
+          },
+          // 요청이 성공했을 때 실행되는 부분
+          success: function (res) {
+            console.log("성공", res);
+          },
+          // 요청이 실패했을 때 실행되는 부분
+          error: function () {
+            console.log("실패");
+          },
+        });
+      }
+
       const $no = document.querySelector("#no");
       let noVal = 1;
 
-      $no.addEventListener("click", () => {
-        console.log(noVal);
+      $no.addEventListener("click", (e) => {
         if (noVal === 1) {
           noVal = 0;
         } else if (noVal === 0) {
           noVal = 1;
         }
+        sortList(e, noVal);
       });
 
       const $title = document.querySelector("#title");

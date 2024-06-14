@@ -24,4 +24,5 @@ public class CommentItemDto {
 		return CommentItemDto.builder().id(comment.getId()).userName(comment.getUserName()).ctext(comment.getCtext())
 				.modifiedTime(comment.getModifiedTime()).build();
 	}
+
 }

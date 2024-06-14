@@ -2,6 +2,7 @@ package com.itwill.spring2.service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,6 @@ import com.itwill.spring2.dto.CommentItemDto;
 import com.itwill.spring2.dto.CommentUpdateDto;
 import com.itwill.spring2.repository.Comment;
 import com.itwill.spring2.repository.CommentDao;
-import com.itwill.spring2.repository.PostDao;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,6 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class CommentService {
 	private final CommentDao commentDao; // 생성자에 의한 의존성 주입
-	private final PostDao postDao;
 
 	public List<CommentItemDto> readByPostId(Integer id) {
 		log.debug("readByPostId()");
@@ -41,6 +40,23 @@ public class CommentService {
 
 			return Collections.emptyList();
 		}
+	}
+
+	public CommentItemDto readById(Integer id) {
+//		Comment comment = commentDao.selectById(id);
+//
+//		return CommentItemDto.fromEntity(comment);
+		Optional<Comment> optionalComment = Optional.ofNullable(commentDao.selectById(id));
+		CommentItemDto res = null;
+		Comment comment = null;
+		if (optionalComment.isPresent()) {
+			comment = optionalComment.get();
+		} else {
+			comment = new Comment();
+		}
+		res = CommentItemDto.fromEntity(comment);
+
+		return res;
 	}
 
 	public int create(CommentCreateDto commentCreateDto) {
