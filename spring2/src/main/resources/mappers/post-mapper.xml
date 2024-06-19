@@ -69,5 +69,44 @@
 		</where>
 		order by id desc
 	</select>
-	
+	<!-- 테스트 -->
+	<select id="sort" resultType="Post">
+		<bind name="searchKeyword" value="'%' + keyword + '%'" />
+		select * from posts
+		<where>
+			<choose>
+				<when test='keywordCategory == null'>
+				</when>
+				<when test='keywordCategory.equals("t")'>
+					upper(title) like upper(#{searchKeyword})
+				</when>
+				<when test='keywordCategory.equals("c")'>
+					upper(content) like upper(#{searchKeyword})
+				</when>
+				<when test='keywordCategory.equals("tc")'>
+					upper(title) like upper(#{searchKeyword})
+					or
+					upper(content) like upper(#{searchKeyword})
+				</when>
+				<when test='keywordCategory.equals("a")'>
+					upper(author) like upper(#{searchKeyword})
+				</when>
+			</choose>
+		</where>
+		order by
+		<choose>
+			<when test='sortCategory.equals("NO")'>
+				id
+				<if test='sort == 1'>
+					desc
+				</if>
+				<if test='sort == 0'>
+					asc
+				</if>
+			</when>
+		</choose>
+		<!-- <choose> <when test='sort == 1")'> desc </when> </choose> -->
+
+	</select>
+
 </mapper>

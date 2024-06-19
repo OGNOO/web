@@ -2,7 +2,6 @@ package com.itwill.spring2.web;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +14,7 @@ import com.itwill.spring2.dto.PostCreateDto;
 import com.itwill.spring2.dto.PostDetailsDto;
 import com.itwill.spring2.dto.PostListDto;
 import com.itwill.spring2.dto.PostUpdateDto;
+import com.itwill.spring2.service.CommentService;
 import com.itwill.spring2.service.PostService;
 
 import jakarta.servlet.http.HttpSession;
@@ -29,10 +29,17 @@ import lombok.extern.slf4j.Slf4j;
 public class PostController {
 
 	private final PostService postService; // 생성자에 의한 의존성 주입
+	private final CommentService commentService;
+	private final HttpSession session;
 
 	@GetMapping("/list")
 	public void list(Model model) {
 		log.debug("list()");
+
+		if (session.getAttribute("keyword") != null || session.getAttribute("category") != null) {
+			session.removeAttribute("keyword");
+			session.removeAttribute("category");
+		}
 
 		// 서비스 컴포넌트의 메서드를 호출, 포스트 목록을 읽어옴 -> 뷰에 전달.
 		List<PostListDto> list = postService.read();
@@ -82,9 +89,6 @@ public class PostController {
 //        // (2) 요청 주소가 /post/modify인 경우 /WEB-INF/views/post/modify.jsp
 //    }	
 
-	@Autowired
-	private HttpSession session;
-
 	@GetMapping("/modify")
 	public String modify(@RequestParam(name = "id") Integer id, Model model) {
 		PostDetailsDto post = postService.read(id);
@@ -101,7 +105,11 @@ public class PostController {
 
 	@GetMapping("/delete")
 	public String delete(@RequestParam(name = "id") Integer id) {
-		postService.delete(id);
+		int res = commentService.deleteAll(id);
+		System.out.println(res);
+		if (res >= 0) {
+			postService.delete(id);
+		}
 
 		return "redirect:/post/list";
 	}

@@ -11,6 +11,7 @@ import com.itwill.spring2.dto.PostDetailsDto;
 import com.itwill.spring2.dto.PostListAjaxDto;
 import com.itwill.spring2.dto.PostListDto;
 import com.itwill.spring2.dto.PostSearchDto;
+import com.itwill.spring2.dto.PostSortDto;
 import com.itwill.spring2.dto.PostUpdateDto;
 import com.itwill.spring2.repository.Post;
 import com.itwill.spring2.repository.PostDao;
@@ -100,6 +101,15 @@ public class PostService {
 		if (!list.isEmpty()) {
 			return list.stream().map(PostListAjaxDto::fromEntity).toList();
 		} else {
+			return Collections.emptyList();
+		}
+	}
+	
+	public List<PostListAjaxDto> sort(PostSortDto postSortDto) {
+		List<Post> list = postDao.sort(postSortDto);
+		if (!list.isEmpty()) {
+			return list.stream().map(PostListAjaxDto::fromEntity).toList();
+		}else {
 			return Collections.emptyList();
 		}
 	}
