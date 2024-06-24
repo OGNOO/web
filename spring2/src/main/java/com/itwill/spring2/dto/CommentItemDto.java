@@ -1,8 +1,6 @@
 package com.itwill.spring2.dto;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-
 import com.itwill.spring2.repository.Comment;
 
 import lombok.AllArgsConstructor;

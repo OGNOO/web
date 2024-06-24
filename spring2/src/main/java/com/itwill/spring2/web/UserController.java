@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.itwill.spring2.dto.UserCreateDto;
 import com.itwill.spring2.service.UserService;
 
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/user")
 public class UserController {
 
-	private final HttpSession session;
+//	private final HttpSession session;
 	private final UserService userService;
 
 	@GetMapping("/signup")
