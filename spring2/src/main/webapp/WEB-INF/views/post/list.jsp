@@ -182,23 +182,72 @@ uri="jakarta.tags.core"%>
       function sortList(e, itemVal) {
         console.log(e.target.innerText);
         console.log(itemVal);
+        const $tbody = document.querySelector("tbody");
+        const $newTbody = document.createElement("tbody");
+        $tbody.parentNode.replaceChild($newTbody, $tbody);
 
-        $.ajax({
-          url: "../post/sort",
-          type: "get",
-          data: {
-            sortCategory: e.target.innerText,
-            sort: itemVal,
+        const res = [
+          {
+            id: 124,
+            title: "qwe",
+            author: "qqqqqqqq",
+            modifiedTime: "2024-06-12 15:45:28",
           },
-          // 요청이 성공했을 때 실행되는 부분
-          success: function (res) {
-            console.log("성공", res);
+          {
+            id: 123,
+            title: "qweq5",
+            author: "q",
+            modifiedTime: "2024-06-12 15:02:49",
           },
-          // 요청이 실패했을 때 실행되는 부분
-          error: function () {
-            console.log("실패");
+          {
+            id: 25,
+            title: "???",
+            author: "@@@",
+            modifiedTime: "2024-05-28 11:47:59",
           },
+        ];
+        // $.ajax({
+        //   url: "../post/sort",
+        //   type: "get",
+        //   data: {
+        //     sortCategory: e.target.innerText,
+        //     sort: itemVal,
+        //   },
+        //   // 요청이 성공했을 때 실행되는 부분
+        //   success: function (res) {
+        //     console.log("성공", res);
+        res.forEach((row) => {
+          const $tr = document.createElement("tr");
+
+          let aForNo = 0;
+          Object.values(row).forEach((cell, index) => {
+            const $td = document.createElement("td");
+            if (index === 0) {
+              aForNo = cell;
+            }
+            if (index === 1) {
+              const $a = document.createElement("a");
+              $a.textContent = cell;
+              $a.href = "/spring2/post/details?id=" + aForNo;
+              $a.style.textDecoration = "none";
+              $a.style.color = "#fff";
+              $td.append($a);
+            } else {
+              $td.textContent = cell;
+            }
+            if (index === 3) {
+              $td.classList.add("mt-td");
+            }
+            $tr.append($td);
+          });
+          $newTbody.append($tr);
         });
+        //   },
+        //   // 요청이 실패했을 때 실행되는 부분
+        //   error: function () {
+        //     console.log("실패");
+        //   },
+        // });
       }
 
       const $no = document.querySelector("#no");
