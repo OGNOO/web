@@ -1,6 +1,7 @@
 package com.itwill.spring2.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.spring2.dto.UserCreateDto;
 import com.itwill.spring2.repository.User;
@@ -32,6 +33,7 @@ public class UserService {
 		System.out.println(userCreateDto);
 		
 		int res = userDao.insert(userCreateDto.toEntity());
+		
 		return res;
 	}
 }

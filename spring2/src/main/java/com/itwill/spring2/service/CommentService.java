@@ -67,7 +67,7 @@ public class CommentService {
 			return -1;
 		}
 		int res = commentDao.insertComment(commentCreateDto.toEntity());
-
+		commentDao.insertComment(commentCreateDto.toEntity());
 		return res;
 	}
 
