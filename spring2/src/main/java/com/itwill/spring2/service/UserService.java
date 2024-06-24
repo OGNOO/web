@@ -1,7 +1,6 @@
 package com.itwill.spring2.service;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.spring2.dto.UserCreateDto;
 import com.itwill.spring2.repository.User;
