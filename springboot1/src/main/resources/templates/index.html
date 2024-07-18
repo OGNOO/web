@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org" lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spring Boot 1</title>
+  </head>
+  <body>
+    <!-- fragment expression: templates/layout/fragments.html 파일에서 선언된 myHeader 프레그먼트 끼워넣기.
+     div 태그 대신 프레그먼트 태그로 교체가 되는 방식. -->
+    <div th:replace="~{/layout/fragments::myHeader('Home Page')}"></div>
+    <!-- fragment expression: templates/layout/fragments.html 파일에서 선언된 navigation 프레그먼트 끼워넣기.
+     div 안에 프레그먼트를 삽입하는 방식. -->
+    <div th:insert="~{/layout/fragments::navigation}"></div>
+    <h1>첫번째 Spring Boot 프로젝트</h1>
+    <h2 th:text="${currentTime}">현재 시간</h2>
+    <h2 th:text="${book}"></h2>
+    ID : <span th:text="${book.id}"></span><br />
+    Title : <span th:text="${book.title}"></span><br />
+    Author :
+    <span th:text="${book.author.firstName}+' '+${book.author.lastName}"></span>
+    <br /><br /><br />
+    <!-- selection expression -->
+    <div th:object="${book}">
+      ID : <span th:text="*{id}"></span><br />
+      Title : <span th:text="*{title}"></span><br />
+      Author :
+      <span th:text="|*{author.firstName} ${book.author.lastName}|"></span>
+    </div>
+    <nav>
+      <ul>
+        <li>
+          <!-- thymeleaf link(URL) expression JSTL 의 c:url 태그와 비슷한 기능. -->
+          <a th:href="@{/book/list}">도서 목록</a>
+        </li>
+      </ul>
+    </nav>
+  </body>
+</html>
