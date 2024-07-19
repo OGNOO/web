@@ -21,7 +21,7 @@
           <td th:text="*{id}"></td>
           <td th:text="*{title}"></td>
           <td
-            th:text="*{author?.firstName ?: '익'}+' '+*{author?.lastName ?: '명'}"
+            th:text="*{author?.firstName ?: '익명'}+' '+*{author?.lastName ?: ''}"
           ></td>
         </tr>
       </tbody>

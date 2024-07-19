@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.itwill.springboot1.dto.Author;
 import com.itwill.springboot1.dto.Book;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Slf4j
 @Controller
@@ -53,6 +55,24 @@ public class HomeController {
 
         // 도서 목록을 뷰에 전달.
         model.addAttribute("bookList", list);
+    }
+
+    @GetMapping("/book/details")
+    public void bookDetails(@RequestParam Integer id, Model model) {
+        Book book = Book.builder().id(id).title("Title")
+                .author(Author.builder().firstName("fName-").lastName("LastName").build()).build();
+
+        model.addAttribute("book", book);
+    }
+
+    @GetMapping("/book/details/{id}")
+    public String getMethodName(@PathVariable Integer id, Model model) {
+        Book book = Book.builder().id(id).title("Title")
+                .author(Author.builder().firstName("fName-").lastName("LastName").build()).build();
+
+        model.addAttribute("book", book);
+
+        return "/book/details";
     }
 
 }
