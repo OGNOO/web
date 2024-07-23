@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.tymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spring Boot 2</title>
+  </head>
+  <body>
+    <div th:replace="~{/layout/fragments::pageHeader('직원 목록')}"></div>
+    <table>
+      <thead>
+        <tr>
+          <th>아이디</th>
+          <th>이름</th>
+          <th>직무</th>
+          <th>매니져</th>
+          <th>입사일</th>
+          <th>급여</th>
+          <th>수당</th>
+          <th>부서</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each=" emp : ${empList}" th:object="${emp}">
+          <td>
+            <a th:text="*{id}" th:href="@{/employee/detail/} + *{id}"></a>
+          </td>
+          <td>
+            <a th:text="*{ename}" th:href="@{/employee/detail/} + *{id}"></a>
+          </td>
+          <td th:text="*{job}"></td>
+          <td>
+            <a
+              th:text="*{manager?.ename ?: ''}"
+              th:href="@{/employee/detail/} + *{manager?.id ?: ''}"
+            ></a>
+          </td>
+          <td th:text="*{#temporals.format(hiredate, 'yyyy-MM-dd HH:mm')}"></td>
+          <td th:text="*{salary}"></td>
+          <td th:text="*{commission ?: '0.0'}"></td>
+          <td>
+            <a
+              th:text="*{department.departmentName}"
+              th:href="@{/department/detail/} + *{department.id}"
+            ></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

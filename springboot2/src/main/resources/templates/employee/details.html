@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.tymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spring Boot 2</title>
+  </head>
+  <body>
+    <div th:replace="~{/layout/fragments::pageHeader('직원 목록')}"></div>
+    <span th:text="'아이디 : ' + ${employee.id}"></span><br />
+    <span th:text="'이름 : ' + ${employee.ename}"></span><br />
+    <span th:text="'직무 : ' + ${employee.job}"></span><br />
+    <span th:text="'매니져 : ' + ${employee.manager?.ename ?: ''}"></span><br />
+    <span
+      th:text="'입사일 : ' + ${#temporals.format(employee.hiredate, 'yyyy-MM-dd HH:mm')}"
+    ></span
+    ><br />
+    <span th:text="'급여 : ' + ${employee.salary}"></span><br />
+    <span th:text="'수당 : ' + ${employee?.commission ?: '0.0'}"></span><br />
+    <span th:text="'부서 : ' + ${employee.department.departmentName}"></span
+    ><br />
+  </body>
+</html>
