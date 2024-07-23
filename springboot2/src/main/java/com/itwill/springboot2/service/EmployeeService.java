@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.springboot2.domain.Employee;
 import com.itwill.springboot2.repository.EmployeeRepository;
@@ -19,6 +20,7 @@ public class EmployeeService {
 
 	private final EmployeeRepository employeeRepository;
 
+	@Transactional
 	public List<Employee> empList() {
 		log.info("직원목록 서비스");
 		Optional<List<Employee>> optionalEmpList = Optional.ofNullable(employeeRepository.findAll());
@@ -33,6 +35,7 @@ public class EmployeeService {
 		return empList;
 	}
 
+	@Transactional
 	public Employee empDetail(Integer id) {
 		Optional<Employee> optionalEmployee = employeeRepository.findById(id);
 		Employee employee;
@@ -41,7 +44,7 @@ public class EmployeeService {
 		} else {
 			employee = new Employee();
 		}
-		
+
 		return employee;
 	}
 }

@@ -31,9 +31,8 @@ public class DepartmentController {
 	}
 
 	@GetMapping("/department/detail/{deptno}")
-	public String departmentDetail(@PathVariable int deptno, Model model) {
+	public String departmentDetail(@PathVariable Integer deptno, Model model) {
 		log.info("부서상세");
-		// log.info("deptno={}", deptno);
 		List<Employee> deptEmp = departmentService.deptDetail(deptno);
 		model.addAttribute("deptEmp", deptEmp);
 

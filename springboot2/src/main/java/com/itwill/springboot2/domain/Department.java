@@ -32,6 +32,6 @@ public class Department {
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
   @ToString.Exclude
-  // mappedBy: Employee 엔티티에서 @OneToMany 애너테이션이 설정된 필드 이름.
+  // mappedBy: Employee 엔티티에서 @ManyToOne 애너테이션이 설정된 필드 이름.
   private List<Employee> Employee;
 }
