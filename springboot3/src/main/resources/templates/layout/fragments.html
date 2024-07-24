@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.tymeleaf.org">
+  <div th:fragment="pageHeader(title)">
+    <header>
+      <h1 th:text="${title}"></h1>
+    </header>
+    <nav>
+      <ul>
+        <li><a th:href="@{/}">홈페이지</a></li>
+        <li><a th:href="@{/employee/list}">직원목록</a></li>
+        <li><a th:href="@{/department/list}">부서목록</a></li>
+        <li><a th:href="@{/employee/jobHistory}">로그목록</a></li>
+      </ul>
+    </nav>
+  </div>
+</html>
