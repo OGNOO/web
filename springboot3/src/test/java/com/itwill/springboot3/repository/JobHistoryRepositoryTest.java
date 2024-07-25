@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.springboot3.domain.JobHistory;
 import com.itwill.springboot3.domain.JobHistoryId;
+import com.itwill.springboot3.dto.JobHistoryDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,14 +22,14 @@ public class JobHistoryRepositoryTest {
 	@Autowired
 	private JobHistoryRepository jobHistoryRepository;
 
-	@Test
+//	@Test
 	@Transactional
 	public void testFindAll() {
 		List<JobHistory> list = jobHistoryRepository.findAll();
 		log.info(list.toString());
 	}
 
-	@Test
+//	@Test
 	@Transactional
 	public void testFindById() {
 		String dateStr = "1997-09-21 00:00:00.000";
@@ -43,5 +44,14 @@ public class JobHistoryRepositoryTest {
 		log.info("jobHistory={}", jobHistory);
 		log.info("jobHistory.job={}", jobHistory.getJob());
 		log.info("jobHistory.department={}", jobHistory.getDepartment());
+	}
+
+	@Test
+	@Transactional
+	public void testFindAllJobHistoryDtos() {
+		List<JobHistoryDto> res = jobHistoryRepository.findAllJobHistoryDtos();
+//		res.forEach(dto -> System.out.println(dto.getEmployeeId() + ", " + dto.getFullName() + ", " + dto.getStartDate()
+//				+ ", " + dto.getEndDate() + ", " + dto.getJobTitle() + ", " + dto.getDepartmentName()));
+		res.forEach(dto -> System.out.println(dto.toString()));
 	}
 }

@@ -59,10 +59,60 @@ public class EmployeeRepositoryTest {
 		log.info("emp.department={}", emp.getDepartment());
 	}
 
-	@Test
+//	@Test
 	@Transactional
 	void testFindByDepartmentId() {
 		List<Employee> res = empRepo.findByDepartmentId(50);
-		System.out.println(res);
+		res.forEach(i -> System.out.println(i));
 	}
+
+//	@Test
+	@Transactional
+	void testFindByFirstName() {
+		List<Employee> res = empRepo.findByFirstName("Diana");
+		res.forEach(i -> System.out.println(i));
+	}
+
+//	@Test
+	@Transactional
+	void testFindBySalary() {
+//		List<Employee> res = empRepo.findBySalaryGreaterThan(15000.0);
+//		List<Employee> res = empRepo.findBySalaryLessThan(1000.0);
+		List<Employee> res = empRepo.findBySalaryBetween(10000.0, 15000.0);
+		res.forEach(i -> System.out.println(i));
+	}
+
+//	@Test
+	@Transactional
+	void testFindByName() {
+//		List<Employee> res = empRepo.findByName("Te", "te");
+		List<Employee> res = empRepo.findByName2("Te");
+		System.out.println(res);
+		res.forEach(i -> System.out.println(i));
+	}
+
+//	@Test
+	@Transactional
+	void testFindByDeptName() {
+		List<Employee> res = empRepo.findByDeptName("IT");
+		System.out.println(res);
+		res.forEach(i -> System.out.println(i));
+	}
+
+//	@Test
+	@Transactional
+	void testFindByDeptCityName() {
+		List<Employee> res = empRepo.findByDeptCityName("Roma");
+		System.out.println(res);
+		res.forEach(i -> System.out.println(i));
+	}
+
+	@Test
+	@Transactional
+	void testFindByDeptCountryName() {
+		List<Employee> res = empRepo.findByDeptCountryName("Canada");
+		System.out.println(res);
+		res.forEach(i -> System.out.println(i));
+	}
+
 }

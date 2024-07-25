@@ -39,5 +39,5 @@ public class JobHistory {
 	@ToString.Exclude
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DEPARTMENT_ID")
-	private Department Department;
+	private Department department;
 }

@@ -1,12 +1,52 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.tymeleaf.org">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Spring Boot 3</title>
+    <th:block th:replace="~{/layout/fragments :: documentHeader}"></th:block>
   </head>
   <body>
-    <div th:replace="~{/layout/fragments::pageHeader('직원 상세')}"></div>
-    <p th:text="${employee}"></p>
+    <div th:replace="~{/layout/fragments::pageHeader('직원 상세정보')}"></div>
+    <div th:object="${employee}" class="m-5">
+      <div class="d-flex">
+        <span>사번:&nbsp;</span>
+        <p th:text="*{employeeId}"></p>
+      </div>
+      <div class="d-flex">
+        <span>사원명:&nbsp;</span>
+        <p th:text="*{employeeName}"></p>
+      </div>
+      <div class="d-flex">
+        <span>이메일:&nbsp;</span>
+        <p th:text="*{email}"></p>
+      </div>
+      <div class="d-flex">
+        <span>전화번호:&nbsp;</span>
+        <p th:text="*{phoneNumber}"></p>
+      </div>
+      <div class="d-flex">
+        <span>입사일:&nbsp;</span>
+        <p th:text="*{hireDate}"></p>
+      </div>
+      <div class="d-flex">
+        <span>직무:&nbsp;</span>
+        <p th:text="*{jobtitle}"></p>
+      </div>
+      <div class="d-flex">
+        <span>급여:&nbsp;</span>
+        <p th:text="*{salary ?: '0.0'}"></p>
+      </div>
+      <div class="d-flex">
+        <span>상여금:&nbsp;</span>
+        <p th:text="*{commissionPct ?: '0.0'}"></p>
+      </div>
+      <div class="d-flex">
+        <span>매니져:&nbsp;</span>
+        <p th:text="*{managerName ?: '--'}"></p>
+      </div>
+      <div class="d-flex">
+        <span>부서명:&nbsp;</span>
+        <p th:text="*{departmentName ?: '--'}"></p>
+      </div>
+    </div>
+    <th:block th:replace="~{/layout/fragments :: bootstrapJS}"></th:block>
   </body>
 </html>
