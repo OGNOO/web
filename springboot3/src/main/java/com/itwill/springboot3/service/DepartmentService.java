@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -52,5 +53,16 @@ public class DepartmentService {
 		}
 
 		return listEmployee;
+	}
+
+	@Transactional(readOnly = true)
+	public Integer selectDeptId(String departmentName) {
+		log.info("부서상세 서비스(부서이름으로 검색)");
+		Department dept = Department.builder().departmentName(departmentName).build();
+		Example<Department> ex = Example.of(dept);
+		Department getDept = departmentRepository.findOne(ex).orElseThrow();
+		Integer res = getDept.getId();
+
+		return res;
 	}
 }

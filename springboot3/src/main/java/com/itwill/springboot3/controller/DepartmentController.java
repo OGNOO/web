@@ -43,4 +43,13 @@ public class DepartmentController {
 
 		return "/department/details";
 	}
+
+	@GetMapping("/details")
+	public void details(@RequestParam(name = "dname") String departmentName, Model model) {
+		log.info("departmentName={}", departmentName);
+		Integer deptno = departmentService.selectDeptId(departmentName);
+		List<EmployeeListItemDto> deptEmp = departmentService.deptDetail(deptno);
+		model.addAttribute("empList", deptEmp);
+	}
+
 }

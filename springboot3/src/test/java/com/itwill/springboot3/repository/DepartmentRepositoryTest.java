@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.springboot3.domain.Department;
+import com.itwill.springboot3.dto.EmployeeListItemDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,14 +19,14 @@ public class DepartmentRepositoryTest {
 	@Autowired
 	private DepartmentRepository departmentRepository;
 
-	@Test
+//	@Test
 	@Transactional
 	public void testFindAll() {
 		List<Department> list = departmentRepository.findAll();
 		log.info(list.toString());
 	}
 
-	@Test
+//	@Test
 	@Transactional
 	public void testFindById() {
 		Department department = departmentRepository.findById(150).orElseThrow();

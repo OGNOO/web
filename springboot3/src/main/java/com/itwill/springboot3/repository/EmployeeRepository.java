@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.itwill.springboot3.domain.Employee;
+import com.itwill.springboot3.dto.EmployeeListItemDto;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
