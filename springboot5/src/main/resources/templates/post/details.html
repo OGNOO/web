@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <th:block th:replace="~{/layout/fragments :: documentHeader}"></th:block>
+  </head>
+  <body>
+    <div
+      th:replace="~{/layout/fragments :: pageHeader('글 상세 페이지')}"
+    ></div>
+    <main style="padding: 20vh 15% 0 15%">
+      <form action="">
+        <div class="d-flex mb-3 justify-content-between">
+          <h4>
+            <span class="badge bg-dark me-3">글 번호</span>
+            <span id="postId" th:text="${post.id}"></span>
+          </h4>
+          <h4>
+            <span class="badge bg-dark me-3">작성자</span
+            ><span th:text="${post.author}"></span>
+          </h4>
+          <h4>
+            <span class="badge bg-dark me-3">작성 시간</span
+            ><span
+              th:text="*{#temporals.format(post.modifiedTime, 'yyyy-MM-dd HH:mm')}"
+            ></span>
+          </h4>
+        </div>
+        <div class="mb-3">
+          <h4><span class="badge bg-dark">글 제목</span></h4>
+          <input
+            id="title"
+            type="text"
+            class="form-control"
+            th:value="${post.title}"
+            oninput="updateBtnHandler()"
+          />
+        </div>
+        <div class="mb-3">
+          <h4><span class="badge bg-dark">글 내용</span></h4>
+          <textarea
+            id="content"
+            class="form-control"
+            rows="3"
+            th:text="${post.content}"
+            oninput="updateBtnHandler()"
+          ></textarea>
+        </div>
+      </form>
+      <div class="d-grid gap-2">
+        <button
+          id="updateBtn"
+          class="btn btn-success"
+          type="button"
+          onclick="updatePostDetail()"
+        >
+          수정
+        </button>
+        <button class="btn btn-danger" type="button" onclick="deletePost()">
+          삭제
+        </button>
+      </div>
+    </main>
+    <th:block th:replace="~{/layout/fragments :: bootstrapJS}"></th:block>
+    <script>
+      function updatePostDetail() {
+        const confirmation = confirm("진짜 수정할거임?");
+        if (confirmation) {
+          const $postId = document.querySelector("#postId");
+          const $title = document.querySelector("#title");
+          const $content = document.querySelector("#content");
+          const postData = {
+            id: $postId.textContent,
+            title: $title.value,
+            content: $content.value,
+            // 필요에 따라 다른 데이터 추가
+          };
+
+          fetch("/post/update", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(postData),
+          })
+            .then((response) => {
+              if (response.ok) {
+                alert("수정이 완료되었습니다.");
+                window.location.href = "/post/list";
+              } else {
+                alert("수정 중 오류가 발생했습니다.");
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              alert("수정 중 오류가 발생했습니다.");
+            });
+        }
+      }
+      function deletePost() {
+        const confirmation = confirm("진짜 삭제할거임?");
+        if (confirmation) {
+          const $postId = document.querySelector("#postId");
+
+          fetch(`/post/delete/${$postId.textContent}`, {
+            method: "post",
+          })
+            .then((response) => {
+              if (response.ok) {
+                alert("삭제가 완료되었습니다.");
+                window.location.href = "/post/list";
+              } else {
+                alert("삭제 중 오류가 발생했습니다.");
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              alert("삭제 중 오류가 발생했습니다.");
+            });
+        }
+      }
+      function updateBtnHandler() {
+        const regex = /^\s+$/;
+        const $title = document.querySelector("#title");
+        const $content = document.querySelector("#content");
+        const $updateBtn = document.querySelector("#updateBtn");
+        if (
+          regex.test($title.value) ||
+          $title.value.trim() === "" ||
+          regex.test($content.value) ||
+          $content.value.trim() === ""
+        ) {
+          // 공백 검사
+          $updateBtn.disabled = true;
+        } else {
+          $updateBtn.disabled = false;
+        }
+        const titleMaxLen = 25;
+        if ($title.value.length >= titleMaxLen) {
+          alert(`내용은 ${titleMaxLen}자 까지만 입력가능합니다.`);
+          $title.value = $title.value.substring(0, titleMaxLen - 1);
+        }
+        const contentMaxLen = 250;
+        if ($content.value.length >= contentMaxLen) {
+          alert(`내용은 ${contentMaxLen}자 까지만 입력가능합니다.`);
+          $content.value = $content.value.substring(0, contentMaxLen - 1);
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <th:block th:replace="~{/layout/fragments :: documentHeader}"></th:block>
+  </head>
+  <body>
+    <div
+      th:replace="~{/layout/fragments :: pageHeader('글 상세 페이지')}"
+    ></div>
+    <main style="padding: 20vh 15% 0 15%">
+      <form th:href="@{/create}" method="post">
+        <div class="d-flex mb-3 justify-content-between">
+          <h4>
+            <span class="badge bg-dark me-3">작성자</span>
+          </h4>
+          <input name="author" type="text" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <h4><span class="badge bg-dark">글 제목</span></h4>
+          <input name="title" type="text" class="form-control" />
+        </div>
+        <div class="mb-5">
+          <h4><span class="badge bg-dark">글 내용</span></h4>
+          <textarea name="content" class="form-control" rows="3"></textarea>
+        </div>
+        <div class="d-grid gap-2">
+          <button class="btn btn-success" type="submit">확인</button>
+          <button class="btn btn-danger" type="button">취소</button>
+        </div>
+      </form>
+    </main>
+    <th:block th:replace="~{/layout/fragments :: bootstrapJS}"></th:block>
+  </body>
+</html>
