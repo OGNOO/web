@@ -18,7 +18,7 @@ import com.itwill.springboot5.dto.PostSearchRequestDto;
 import com.itwill.springboot5.dto.PostUpdateDto;
 import com.itwill.springboot5.service.PostService;
 
-import jakarta.servlet.http.HttpSession;
+//import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 public class PostController {
 
 	private final PostService postService;
-	private final HttpSession session;
+	// private final HttpSession session;
 
 	@GetMapping("/list")
 	public void list(@RequestParam(name = "p", defaultValue = "0") int pageNo, Model model) {
@@ -91,16 +91,16 @@ public class PostController {
 	@GetMapping("/search")
 	public String search(PostSearchRequestDto postSearchRequestDto, Model model) {
 		log.info("searchDto={}", postSearchRequestDto);
-		if (postSearchRequestDto.getCategory() != null) {
-			session.setAttribute("category", postSearchRequestDto.getCategory());
-		} else {
-			postSearchRequestDto.setCategory((String) session.getAttribute("category"));
-		}
-		if (postSearchRequestDto.getKeyword() != null) {
-			session.setAttribute("keyword", postSearchRequestDto.getKeyword());
-		} else {
-			postSearchRequestDto.setKeyword((String) session.getAttribute("keyword"));
-		}
+		// if (postSearchRequestDto.getCategory() != null) {
+		// session.setAttribute("category", postSearchRequestDto.getCategory());
+		// } else {
+		// postSearchRequestDto.setCategory((String) session.getAttribute("category"));
+		// }
+		// if (postSearchRequestDto.getKeyword() != null) {
+		// session.setAttribute("keyword", postSearchRequestDto.getKeyword());
+		// } else {
+		// postSearchRequestDto.setKeyword((String) session.getAttribute("keyword"));
+		// }
 		Page<PostListItemDto> postList = postService.search(postSearchRequestDto);
 		model.addAttribute("postList", postList);
 

@@ -7,8 +7,8 @@
     <div
       th:replace="~{/layout/fragments :: pageHeader('글 상세 페이지')}"
     ></div>
-    <main style="padding: 20vh 15% 0 15%">
-      <form action="">
+    <main style="padding: 5vh 15% 0 15%">
+      <form>
         <div class="d-flex mb-3 justify-content-between">
           <h4>
             <span class="badge bg-dark me-3">글 번호</span>
@@ -59,8 +59,58 @@
           삭제
         </button>
       </div>
+      <div class="mt-2">
+        <!-- 댓글 목록 -->
+        <div class="card-header text-center mb-3 d-grid">
+          <button
+            id="btnToggle"
+            data-toggle="collapse"
+            class="btn btn-outline-secondary"
+          >
+            댓글 보기
+          </button>
+        </div>
+        <div id="collapseComments" class="card-body collapse pt-3">
+          <!-- 댓글 작성 -->
+          <div class="row">
+            <div class="col-10">
+              <textarea
+                id="commentText"
+                class="form-control"
+                rows="3"
+                placeholder="댓글 내용 작성"
+              ></textarea>
+              <!-- TODO : 로그인 사용자 이름으로 설정 -->
+              <span id="commentWriter" class="d-none">admin</span>
+            </div>
+            <div class="col-2">
+              <button
+                id="btnRegisterComment"
+                class="btn btn-outline-success form-control"
+                style="height: 100%"
+              >
+                댓글 등록
+              </button>
+            </div>
+          </div>
+          <!-- 댓글 목록 -->
+          <div id="divComments" class="mt-3"></div>
+          <!-- 댓글 목록 페이징 처리를 위한 버튼: [더보기] 버튼 -->
+          <div class="text-center d-grid">
+            <button
+              id="btnMoreComments"
+              class="btn btn-secondary mt-3 mb-5"
+              data-currentPageNo="0"
+            >
+              더보기
+            </button>
+          </div>
+        </div>
+      </div>
     </main>
     <th:block th:replace="~{/layout/fragments :: bootstrapJS}"></th:block>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script th:src="@{/js/comment.js}"></script>
     <script>
       function updatePostDetail() {
         const confirmation = confirm("진짜 수정할거임?");
@@ -137,14 +187,27 @@
         const titleMaxLen = 25;
         if ($title.value.length >= titleMaxLen) {
           alert(`내용은 ${titleMaxLen}자 까지만 입력가능합니다.`);
-          $title.value = $title.value.substring(0, titleMaxLen - 1);
+          $title.value = $title.value.substring(0, titleMaxLen);
         }
         const contentMaxLen = 250;
         if ($content.value.length >= contentMaxLen) {
           alert(`내용은 ${contentMaxLen}자 까지만 입력가능합니다.`);
-          $content.value = $content.value.substring(0, contentMaxLen - 1);
+          $content.value = $content.value.substring(0, contentMaxLen);
         }
       }
+      document.addEventListener("DOMContentLoaded", function () {
+        const $commentText = document.querySelector("#commentText");
+        $commentText.addEventListener("input", () => {
+          const commentTextMaxLen = 500;
+          if ($commentText.value.length > commentTextMaxLen) {
+            alert(`댓글은 ${commentTextMaxLen}자 까지만 입력가능합니다.`);
+            $commentText.value = $commentText.value.substring(
+              0,
+              commentTextMaxLen
+            );
+          }
+        });
+      });
     </script>
   </body>
 </html>

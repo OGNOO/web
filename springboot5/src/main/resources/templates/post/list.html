@@ -70,5 +70,46 @@
       <th:block th:replace="~{/layout/fragments :: pagination}"></th:block>
     </div>
     <th:block th:replace="~{/layout/fragments :: bootstrapJS}"></th:block>
+    <script>
+      window.onload = function () {
+        const paramStr = window.location.search;
+        const categoryParam = "?category=";
+        const keywordParam = "&keyword=";
+        const pParam = "&p=";
+
+        if (
+          paramStr.includes(categoryParam) &&
+          paramStr.includes(keywordParam) &&
+          paramStr.includes(pParam)
+        ) {
+          const $$pageNumber = document.querySelectorAll(".pageNumber");
+
+          $$pageNumber.forEach(($pageNumber) => {
+            const url = new URL($pageNumber.href);
+            const params = new URLSearchParams(url.search);
+            const nowHref = window.location.href;
+            const removePparam = nowHref.substring(0, nowHref.indexOf(pParam));
+
+            params.forEach((value, key) => {
+              $pageNumber.href = removePparam + `&${key}=${value}`;
+            });
+          });
+        } else if (
+          paramStr.includes(categoryParam) &&
+          paramStr.includes(keywordParam)
+        ) {
+          const $$pageNumber = document.querySelectorAll(".pageNumber");
+
+          $$pageNumber.forEach(($pageNumber) => {
+            const url = new URL($pageNumber.href);
+            const params = new URLSearchParams(url.search);
+
+            params.forEach((value, key) => {
+              $pageNumber.href = window.location.href + `&${key}=${value}`;
+            });
+          });
+        }
+      };
+    </script>
   </body>
 </html>

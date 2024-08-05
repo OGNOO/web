@@ -114,6 +114,7 @@ public class PostService {
 			list = postRepository.findByTitleContainingIgnoreCase(keyword, pageable);
 		}
 		Page<PostListItemDto> posts = list.map(PostListItemDto::fromEntity);
+		
 		return posts;
 	}
 }

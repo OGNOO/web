@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.itwill.springboot5.domain.Post;
 
 @Repository
-public interface PostRepository extends JpaRepository<Post, Long> {
+public interface PostRepository extends JpaRepository<Post, Long>, PostQuerydsl{
 
 	Page<Post> findByTitleContainingIgnoreCase(String keyword, Pageable pageable);
 

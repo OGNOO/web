@@ -60,7 +60,7 @@
             th:classappend="${pageNo == postList.number} ? 'active'"
           >
             <a
-              class="page-link"
+              class="page-link pageNumber"
               th:href="@{|?p=${pageNo}|}"
               th:text="${pageNo + 1}"
             ></a>

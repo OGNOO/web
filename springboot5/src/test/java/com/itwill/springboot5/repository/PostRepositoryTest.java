@@ -62,21 +62,23 @@ public class PostRepositoryTest {
 		posts.forEach(i -> System.out.println(i));
 	}
 
-//	@Test
+	@Test
 	void testSelectTitleOrContent() {
 		String keyword = "테";
 		int page = 0;
 		Pageable pageable = PageRequest.of(page, 5, Sort.by("id").descending());
-		Page<Post> posts = postRepository.findByTitleContainingOrContentContainingAllIgnoringCase(keyword, keyword, pageable);
+		Page<Post> posts = postRepository.findByTitleContainingOrContentContainingAllIgnoringCase(keyword, keyword,
+				pageable);
 		posts.forEach(i -> System.out.println(i));
 	}
-	
+
 	@Test
 	void testMyFindByTitleOrContent() {
 		String keyword = "테";
-		int page = 0;
+		int page = 1;
 		Pageable pageable = PageRequest.of(page, 5, Sort.by("id").descending());
 		Page<Post> posts = postRepository.findByTitleOrContent(keyword, pageable);
 		posts.forEach(i -> System.out.println(i));
 	}
+
 }
