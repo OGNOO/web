@@ -2,6 +2,7 @@ package com.itwill.springboot5.controller;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,6 +40,7 @@ public class PostController {
 
 	}
 
+	@PreAuthorize("isAuthenticated()") // => role 에 상관없이 아이디/비번으로만 인증하는 경우
 	@GetMapping("/details/{id}")
 	public String details(@PathVariable(name = "id") Long id, Model model) {
 		log.info("details()");
@@ -49,12 +51,15 @@ public class PostController {
 		return "/post/details";
 	}
 
+	@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+//	@PreAuthorize("hasRole('USER')")
 	@GetMapping("/create")
 	public void createPage() {
 		log.info("createPage()");
 
 	}
 
+	@PreAuthorize("hasRole('USER')")
 	@PostMapping("/create")
 	public String create(PostCreateDto postCreateDto) {
 		log.info("create={}", postCreateDto);
@@ -66,6 +71,7 @@ public class PostController {
 		return "redirect:/post/list";
 	}
 
+	@PreAuthorize("hasRole('USER')")
 	@PostMapping("/update")
 	public String update(@RequestBody PostUpdateDto postUpdateDto) {
 		log.info("update={}", postUpdateDto.toString());
@@ -77,6 +83,7 @@ public class PostController {
 		return "redirect:/post/list";
 	}
 
+	@PreAuthorize("hasRole('USER')")
 	@PostMapping("/delete/{id}")
 	public String delete(@PathVariable(name = "id") Long id) {
 		log.info("delete={}", id);
@@ -106,17 +113,5 @@ public class PostController {
 
 		return "post/list";
 	}
-	/*
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * */
+
 }

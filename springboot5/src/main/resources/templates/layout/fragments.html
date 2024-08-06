@@ -36,7 +36,12 @@
             <div class="navbar-nav">
               <a class="nav-link" th:href="@{/post/list}">포스트 목록</a>
               <a class="nav-link" th:href="@{/post/create}">새 포스트</a>
-              <a class="nav-link" th:href="@{/login}">로그인</a>
+              <th:block sec:authorize="isAnonymous()">
+                <a class="nav-link" th:href="@{/member/login}">로그인</a>
+              </th:block>
+              <th:block sec:authorize="isAuthenticated()">
+                <a class="nav-link" th:href="@{/logout}">로그아웃</a>
+              </th:block>
             </div>
           </div>
         </div>

@@ -97,7 +97,9 @@ function makeCommentElements(content, pageNo) {
     htmlStr += `
     <div class="card text-white bg-dark mb-2" style="max-width: 100%">
       <div class="card-header d-flex justify-content-between">
-        <span class="fw-bold">${e.writer}</span><span>${formatDateTime(
+        <span class="fw-bold">${
+          e.writer
+        }</span><span style="color: #cbcbcb;">${formatDateTime(
       e.modifiedTime
     )}</span>
       </div>
@@ -105,12 +107,7 @@ function makeCommentElements(content, pageNo) {
         <div class="card-text">${e.ctext}</div>
       </div>
       <div class="card-footer px-3 pt-0 border-top-0 d-flex justify-content-end">
-        <button id="commentDelBtn" class="btn py-0 px-2" style="color: gray" data-uri="/api/comment/delete/${
-          e.id
-        }" onclick="clickCommentDelBtn(event)">삭제</button>
-        <button class="btn py-0 px-2" style="color: gray" onclick="clickCommentUpdateBtn(event,${
-          e.id
-        })">수정</button>
+        ${checkCommentWriter(e.writer, e.id)}
       </div>
     </div>
     `;
@@ -123,18 +120,30 @@ function makeCommentElements(content, pageNo) {
 }
 
 function formatDateTime(dateTimeString) {
-  const date = new Date(dateTimeString);
+  const now = new Date();
+  const data = new Date(dateTimeString);
+  const diff = now - data; // 밀리초 단위 차이 계산
+  console.log(diff);
+  const seconds = Math.floor(diff / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+  const months = Math.floor(days / 30);
+  const years = Math.floor(days / 365);
 
-  const pad = (num) => String(num).padStart(2, "0");
-
-  const year = date.getFullYear();
-  const month = pad(date.getMonth() + 1);
-  const day = pad(date.getDate());
-  const hours = pad(date.getHours());
-  const minutes = pad(date.getMinutes());
-  const seconds = pad(date.getSeconds());
-
-  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  if (years > 0) {
+    return years + "년 전";
+  } else if (months > 0) {
+    return months + "달 전";
+  } else if (days > 0) {
+    return days + "일 전";
+  } else if (hours > 0) {
+    return hours + "시간 전";
+  } else if (minutes > 0) {
+    return minutes + "분 전";
+  } else {
+    return seconds + "초 전";
+  }
 }
 
 function clickCommentDelBtn(e) {
@@ -158,7 +167,7 @@ function clickCommentUpdateBtn(e, cid) {
       ".card-text"
     ).innerHTML = `<div class="row">
       <div class="col-10 pe-0">
-        <textarea class="px-2" oninput="asd(event)" row="5" id="targetText" style="width:100%; height:100%; background: gray;
+        <textarea class="px-2" oninput="asd(event)" row="5" id="targetText" style="width:100%; height:100%; background: #494949;
         color: white; border-radius: 3px;">${
           e.target.parentNode.parentNode.querySelector(".card-text").textContent
         }</textarea>
@@ -201,5 +210,16 @@ function asd(e) {
   if (e.target.value.length > commentTextMaxLen) {
     alert(`댓글은 ${commentTextMaxLen}자 까지만 입력가능합니다.`);
     e.target.value = e.target.value.substring(0, commentTextMaxLen);
+  }
+}
+
+function checkCommentWriter(writer, cid) {
+  // TODO : 로그인한 사용자 id 정보 가져오기
+  const loginUser = "admin";
+  if (writer === loginUser) {
+    return `<button id="commentDelBtn" class="btn py-0 px-2" style="color: gray" data-uri="/api/comment/delete/${cid}" onclick="clickCommentDelBtn(event)">삭제</button>
+    <button class="btn py-0 px-2" style="color: gray" onclick="clickCommentUpdateBtn(event,${cid})">수정</button>`;
+  } else {
+    return "";
   }
 }
