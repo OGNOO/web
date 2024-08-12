@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spring Boot 5</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
+    <style>
+      .box::after,
+      .box::before {
+        height: 680px;
+      }
+      #checkboxes {
+        padding: 5px 5px 25px 5px;
+        display: flex;
+        justify-content: space-between;
+        color: wheat;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box" style="height: 680px">
+      <div class="form">
+        <form th:action="@{/member/register}" method="post">
+          <h2>회원가입</h2>
+          <div class="inputBox">
+            <input type="text" name="username" autofocus required />
+            <span>아이디</span>
+            <i></i>
+          </div>
+          <div class="inputBox">
+            <input type="password" name="password" required />
+            <span>비밀번호</span>
+            <i></i>
+          </div>
+          <div class="inputBox">
+            <input type="password" required />
+            <span>비밀번호 확인</span>
+            <i></i>
+          </div>
+          <div class="inputBox" style="margin-bottom: 20px">
+            <input type="email" name="email" required />
+            <span>이메일</span>
+            <i></i>
+          </div>
+          <span style="color: #8f8f8f; font-size: small"
+            >권한을 1개 이상 선택해주세요</span
+          >
+          <div id="checkboxes">
+            <label
+              ><input type="checkbox" name="roles" value="1" /> 일반인</label
+            >
+            <label><input type="checkbox" name="roles" value="2" /> 스텝</label>
+            <label
+              ><input type="checkbox" name="roles" value="3" /> 관리자</label
+            >
+          </div>
+          <div class="links" style="justify-content: center">
+            <a th:href="@{/member/signin}">이미 회원이신가요?</a>
+          </div>
+          <input
+            style="transform: translate(71px, 5px)"
+            type="submit"
+            value="회원가입"
+          />
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

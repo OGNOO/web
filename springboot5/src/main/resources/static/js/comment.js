@@ -212,10 +212,8 @@ function asd(e) {
     e.target.value = e.target.value.substring(0, commentTextMaxLen);
   }
 }
-
 function checkCommentWriter(writer, cid) {
-  // TODO : 로그인한 사용자 id 정보 가져오기
-  const loginUser = "admin";
+  const loginUser = loginUserId;
   if (writer === loginUser) {
     return `<button id="commentDelBtn" class="btn py-0 px-2" style="color: gray" data-uri="/api/comment/delete/${cid}" onclick="clickCommentDelBtn(event)">삭제</button>
     <button class="btn py-0 px-2" style="color: gray" onclick="clickCommentUpdateBtn(event,${cid})">수정</button>`;

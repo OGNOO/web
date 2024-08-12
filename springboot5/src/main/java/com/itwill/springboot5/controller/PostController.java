@@ -3,6 +3,9 @@ package com.itwill.springboot5.controller;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,16 +55,21 @@ public class PostController {
 	}
 
 	@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
-//	@PreAuthorize("hasRole('USER')")
+	// @PreAuthorize("hasRole('USER')")
 	@GetMapping("/create")
 	public void createPage() {
 		log.info("createPage()");
-
 	}
 
 	@PreAuthorize("hasRole('USER')")
 	@PostMapping("/create")
 	public String create(PostCreateDto postCreateDto) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetails = (UserDetails) auth.getPrincipal();
+		if (!userDetails.getUsername().equals(postCreateDto.getAuthor())) {
+			return "redirect:/post/create";
+		}
+
 		log.info("create={}", postCreateDto);
 		int res = postService.create(postCreateDto);
 		if (res == 0) {

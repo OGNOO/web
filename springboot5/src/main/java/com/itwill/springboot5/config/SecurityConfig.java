@@ -6,12 +6,12 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 //import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 //import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+//import org.springframework.security.core.userdetails.User;
+//import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+//import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 // import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
@@ -38,20 +38,20 @@ public class SecurityConfig {
 	// UserDetails 인터페이스를 구현하는 엔터티 클래스가 있어야 함.
 	// 사용자 엔터티와 사용자 서비스를 구현하기 전에 테스트 용도로 사용할 코드.
 
-	@Bean
-	UserDetailsService inMemoryUserDetailsService() {
-		// 에플리케이션이 동작중에 메모리에 임시 저장하는 사용자 객체를 생성:
-		UserDetails user1 = User.withUsername("유저1").password(passwordEncoder().encode("111")).roles("USER").build();
-		// roles("USER") => 사용자 권한(ADMIN, USER, ...)
-		UserDetails user2 = User.withUsername("유저2").password(passwordEncoder().encode("222")).roles("USER", "ADMIN")
-				.build();
-		UserDetails user3 = User.withUsername("유저3").password(passwordEncoder().encode("333")).roles("ADMIN").build();
-		UserDetails user4 = User.withUsername("유저4").password(passwordEncoder().encode("444")).roles("USER").build();
-		UserDetails user5 = User.withUsername("유저5").password(passwordEncoder().encode("555")).roles("USER").build();
-		UserDetails user6 = User.withUsername("유저6").password(passwordEncoder().encode("666")).roles("USER").build();
-
-		return new InMemoryUserDetailsManager(user1, user2, user3, user4, user5, user6);
-	}
+//	@Bean
+//	UserDetailsService inMemoryUserDetailsService() {
+//		// 에플리케이션이 동작중에 메모리에 임시 저장하는 사용자 객체를 생성:
+//		UserDetails user1 = User.withUsername("유저1").password(passwordEncoder().encode("111")).roles("USER").build();
+//		// roles("USER") => 사용자 권한(ADMIN, USER, ...)
+//		UserDetails user2 = User.withUsername("유저2").password(passwordEncoder().encode("222")).roles("USER", "ADMIN")
+//				.build();
+//		UserDetails user3 = User.withUsername("유저3").password(passwordEncoder().encode("333")).roles("ADMIN").build();
+//		UserDetails user4 = User.withUsername("유저4").password(passwordEncoder().encode("444")).roles("USER").build();
+//		UserDetails user5 = User.withUsername("유저5").password(passwordEncoder().encode("555")).roles("USER").build();
+//		UserDetails user6 = User.withUsername("유저6").password(passwordEncoder().encode("666")).roles("USER").build();
+//
+//		return new InMemoryUserDetailsManager(user1, user2, user3, user4, user5, user6);
+//	}
 
 	// 스프링 시큐리티 필터 체인 객체(bean)
 	// 로그인/로그아웃, 인증 필터에서 필요한 설정 구성.
@@ -95,7 +95,7 @@ public class SecurityConfig {
 		// // 사용자가 로그인할 수 있는 로그인 페이지를 설정합니다.
 		// // 'loginPage("/login")'는 로그인 페이지의 경로를 지정합니다.
 		// // 이 경로는 모든 사용자에게 접근을 허용합니다.
-		http.formLogin((login) -> login.loginPage("/member/login"));
+		http.formLogin((login) -> login.loginPage("/member/signin"));
 		// .formLogin(Customizer.withDefaults()) // => 스프링 시큐리티에서 제공하는 로그인 디폴트 페이지로 설정
 		//
 		// // 로그아웃 설정을 정의합니다.

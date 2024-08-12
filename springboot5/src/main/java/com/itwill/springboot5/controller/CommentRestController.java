@@ -3,6 +3,9 @@ package com.itwill.springboot5.controller;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,16 +31,19 @@ public class CommentRestController {
 
 	private final CommentService commentService;
 
-	@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("")
 	public ResponseEntity<Comment> registerComment(@RequestBody CommentRegisterDto commentRegisterDto) {
 		log.info("commentRegisterDto={}", commentRegisterDto);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetails = (UserDetails) auth.getPrincipal();
+		commentRegisterDto.setWriter(userDetails.getUsername());
 		Comment comment = commentService.create(commentRegisterDto);
 
 		return ResponseEntity.ok(comment);
 	}
 
-	@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/all/{postId}")
 	public ResponseEntity<Page<Comment>> showComment(@PathVariable(name = "postId") Long postId,
 			@RequestParam(name = "p", defaultValue = "0") Integer pageNo) {
@@ -46,7 +52,7 @@ public class CommentRestController {
 		return ResponseEntity.ok(res);
 	}
 
-	@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("isAuthenticated()")
 	@DeleteMapping("/delete/{commentId}")
 	public ResponseEntity<Integer> deleteComment(@PathVariable(name = "commentId") Long commentId) {
 		// Comment 삭제 로직 구현
@@ -56,12 +62,13 @@ public class CommentRestController {
 		return ResponseEntity.ok(1);
 	}
 
-	@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("isAuthenticated()")
 	@PutMapping("/update/{cid}")
-	public ResponseEntity<Integer> updateComment(@PathVariable(name = "cid") Long commentId, @RequestParam(name = "ctext") String ctext) {
+	public ResponseEntity<Integer> updateComment(@PathVariable(name = "cid") Long commentId,
+			@RequestParam(name = "ctext") String ctext) {
 		log.info("\ncid={}\nctext={}", commentId, ctext);
 		commentService.updateComment(commentId, ctext);
-		
+
 		return ResponseEntity.ok(1);
 	}
 }

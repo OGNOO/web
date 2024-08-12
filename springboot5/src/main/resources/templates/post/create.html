@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
   <head>
     <th:block th:replace="~{/layout/fragments :: documentHeader}"></th:block>
   </head>
@@ -17,10 +20,9 @@
             name="author"
             type="text"
             class="form-control"
-            value="admin"
+            th:value="${#authentication.name}"
             readonly
           />
-          <!-- TODO: 로그인 사용자 id로 대체 -->
         </div>
         <div class="mb-3">
           <h4><span class="badge bg-dark">글 제목</span></h4>

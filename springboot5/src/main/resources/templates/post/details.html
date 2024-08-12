@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
   <head>
     <th:block th:replace="~{/layout/fragments :: documentHeader}"></th:block>
   </head>
@@ -27,26 +30,48 @@
         </div>
         <div class="mb-3">
           <h4><span class="badge bg-dark">글 제목</span></h4>
-          <input
-            id="title"
-            type="text"
-            class="form-control"
-            th:value="${post.title}"
-            oninput="updateBtnHandler()"
-          />
+          <div th:if="${post.author == #authentication.name}">
+            <input
+              id="title"
+              type="text"
+              class="form-control"
+              th:value="${post.title}"
+              oninput="updateBtnHandler()"
+            />
+          </div>
+          <div th:if="${post.author != #authentication.name}">
+            <input
+              id="title"
+              type="text"
+              class="form-control"
+              th:value="${post.title}"
+              readonly
+            />
+          </div>
         </div>
         <div class="mb-3">
           <h4><span class="badge bg-dark">글 내용</span></h4>
-          <textarea
-            id="content"
-            class="form-control"
-            rows="3"
-            th:text="${post.content}"
-            oninput="updateBtnHandler()"
-          ></textarea>
+          <div th:if="${post.author == #authentication.name}">
+            <textarea
+              id="content"
+              class="form-control"
+              rows="3"
+              th:text="${post.content}"
+              oninput="updateBtnHandler()"
+            ></textarea>
+          </div>
+          <div th:if="${post.author != #authentication.name}">
+            <textarea
+              id="content"
+              class="form-control"
+              rows="5"
+              th:text="${post.content}"
+              readonly
+            ></textarea>
+          </div>
         </div>
       </form>
-      <div class="d-grid gap-2">
+      <div th:if="${post.author == #authentication.name}" class="d-grid gap-2">
         <button
           id="updateBtn"
           class="btn btn-success"
@@ -80,8 +105,6 @@
                 rows="3"
                 placeholder="댓글 내용 작성"
               ></textarea>
-              <!-- TODO : 로그인 사용자 이름으로 설정 -->
-              <span id="commentWriter" class="d-none">admin</span>
             </div>
             <div class="col-2">
               <button
@@ -109,9 +132,14 @@
       </div>
     </main>
     <th:block th:replace="~{/layout/fragments :: bootstrapJS}"></th:block>
+    <script th:inline="javascript">
+      /*<![CDATA[*/
+      const loginUserId = /*[[${#authentication.name}]]*/ "anonymous";
+      /*]]>*/
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script th:src="@{/js/comment.js}"></script>
-    <script>
+    <script th:inline="javascript">
       function updatePostDetail() {
         const confirmation = confirm("진짜 수정할거임?");
         if (confirmation) {
